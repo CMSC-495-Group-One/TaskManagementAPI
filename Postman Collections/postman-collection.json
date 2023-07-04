@@ -505,6 +505,258 @@
 						}
 					],
 					"id": "79773baf-21dd-4cc0-9ce8-c9d5eb9f9962"
+				},
+				{
+					"name": "Prod",
+					"item": [
+						{
+							"name": "Auth",
+							"item": [
+								{
+									"name": "/auth/signin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "4e8e71b2-cff0-498a-aa03-26d7ae534cad",
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.globals.set(\"accessToken\", jsonData.accessToken);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "6c830bc4-b1bd-4dbe-9c24-1cf011b96e77",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/auth/signin"
+									},
+									"response": []
+								},
+								{
+									"name": "/auth/signup",
+									"id": "aac443e5-b578-43bb-8db1-793065d063d9",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"kyndall\",\n    \"password\": \"password\",\n    \"email\": \"kyndal@gmail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/auth/signup"
+									},
+									"response": []
+								}
+							],
+							"id": "a64b5ca1-7fe4-4667-bd49-038364e6f131",
+							"auth": {
+								"type": "noauth"
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "17142d62-8c12-46c5-b216-666b954fd7c3"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "c11addeb-ed7e-4a86-aaa2-fda2698e5f0c"
+									}
+								}
+							]
+						},
+						{
+							"name": "Users",
+							"item": [
+								{
+									"name": "/users",
+									"id": "ba83fc25-f4e9-4f58-a68a-ea9b5354ffce",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/users"
+									},
+									"response": []
+								},
+								{
+									"name": "/users/{id}",
+									"id": "09c32929-ed56-4287-9d53-cb3506be307e",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/users/1"
+									},
+									"response": []
+								},
+								{
+									"name": "/users/{id}",
+									"id": "c4fb893c-f782-492c-9ec6-c18ef9362a17",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"mike\",\n    \"email\": \"mike@gmail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/users/2"
+									},
+									"response": []
+								}
+							],
+							"id": "aaf25525-6e9c-4381-9140-2d7f399e0d89",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
+									}
+								}
+							]
+						},
+						{
+							"name": "Tasks",
+							"item": [
+								{
+									"name": "/tasks",
+									"id": "5ac41ee6-daf9-4fbb-a2f3-786f43f340e0",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/tasks"
+									},
+									"response": []
+								},
+								{
+									"name": "/tasks/{id}",
+									"id": "d6910825-62ae-4bdc-971b-b7821b2dbaff",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/tasks/1"
+									},
+									"response": []
+								},
+								{
+									"name": "/tasks/{id}",
+									"id": "13914ade-73bc-4284-b2eb-88f10758245e",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Task 2\",\n    \"description\": \"New Task 2 Description\",\n    \"userId\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/tasks/2"
+									},
+									"response": []
+								},
+								{
+									"name": "/tasks",
+									"id": "79da6ea7-ec4d-4bdc-8a2f-66b9fac6b48c",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Task 2\",\n    \"description\": \"Task 2 Description\",\n    \"userId\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/tasks"
+									},
+									"response": []
+								}
+							],
+							"id": "6634ed7e-3650-42f3-b65b-653b0dafcff5"
+						}
+					],
+					"id": "fc0ad85c-0c03-47fd-8f3a-9f0d2c58153b"
 				}
 			],
 			"id": "60ed81b9-896c-4596-89da-cce0cb8a155c"
