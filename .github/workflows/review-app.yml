@@ -20,7 +20,8 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           healthcheck: "https://task-management-api-test-${{ github.event.pull_request.number }}.herokuapp.com"
           rollbackonhealthcheckfailed: true
-          usedocker: true
+          usedocker: false
+          appdir: "."
           env: DATABASE_URL=${{ secrets.DB_URL }},DATABASE_USERNAME=${{ secrets.DB_USERNAME }},DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }}
 
       - name: Comment PR
@@ -32,4 +33,17 @@ jobs:
             const repository = context.repo;
             const app_url = `https://task-management-api-test-${issue_number}.herokuapp.com`;
             const message = `Deployed to [Heroku Review App](${app_url}).`;
-            github.rest.issues.createComment({...repository, issue_number, body: message});
+
+            // Fetch all comments of the issue
+            const comments = await github.rest.issues.listComments({...repository, issue_number});
+
+            // Find a comment by this GitHub Actions bot
+            const botComment = comments.data.find(comment => comment.user.login === 'github-actions[bot]' && comment.body.includes('Deployed to'));
+
+            if (botComment) {
+              // If found, update the comment
+              await github.rest.issues.updateComment({...repository, comment_id: botComment.id, body: message});
+            } else {
+              // If not found, create a new comment
+              await github.rest.issues.createComment({...repository, issue_number, body: message});
+            }
