@@ -5,7 +5,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  Deployment:
     runs-on: ubuntu-latest
 
     steps:
@@ -17,6 +17,12 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
+          
+      - name: Set up Maven
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'maven'
 
       - name: Build with Maven
         run: mvn clean install
@@ -27,3 +33,7 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: task-management-api-test
           heroku_email: connor.d.burge@gmail.com
+          env_vars: |
+            DB_URL=${{ secrets.DB_URL }}
+            DB_USERNAME=${{ secrets.DB_USERNAME }}
+            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
