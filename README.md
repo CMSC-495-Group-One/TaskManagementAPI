@@ -1,4 +1,4 @@
-# My Spring Boot Project
+# Task Management API
 
 This is a repository for the Spring Boot project. The project uses Spring Boot with Java 11 and integrates with Postman for API testing.
 
