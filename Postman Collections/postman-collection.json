@@ -152,7 +152,7 @@
 												}
 											}
 										},
-										"url": "{{deploymentURL}}/users/2"
+										"url": "{{testURL}}/users/2"
 									},
 									"response": []
 								}
