@@ -1,4 +1,5 @@
 name: Deploy to Heroku
+
 on:
   workflow_dispatch:
   push:
@@ -20,15 +21,12 @@ jobs:
           distribution: 'adopt'
           maven-version: '3.8.4'
 
-      - name: Build with Maven
-        run: mvn clean install -DskipTests
-
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
         with:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           heroku_app_name: task-management-api-test
-          heroku_email: connor.d.burge@gmail.com
+          heroku_email: ${{ secrets.HEROKU_EMAIL }}
           env_vars: |
             DATABASE_URL=${{ secrets.DB_URL }}
             DATABASE_USERNAME=${{ secrets.DB_USERNAME }}
