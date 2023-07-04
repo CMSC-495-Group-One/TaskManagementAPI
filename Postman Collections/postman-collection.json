@@ -130,7 +130,7 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "{{deploymentURL}}/users/1"
+										"url": "{{testURL}}/users/1"
 									},
 									"response": []
 								},
