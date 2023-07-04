@@ -1,5 +1,6 @@
 name: Deploy to Heroku
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
