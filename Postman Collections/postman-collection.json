@@ -193,7 +193,7 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "{{deploymentURL}}/tasks"
+										"url": "{{testURL}}/tasks"
 									},
 									"response": []
 								},
