@@ -26,7 +26,7 @@
 									}
 								}
 							],
-							"_postman_id": "96bc72b2-cef1-4579-b951-9d1d5a3dd656",
+							"id": "96bc72b2-cef1-4579-b951-9d1d5a3dd656",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -51,7 +51,7 @@
 						},
 						{
 							"name": "/auth/signup",
-							"_postman_id": "b459f99d-987d-498f-a15d-608132b8566e",
+							"id": "b459f99d-987d-498f-a15d-608132b8566e",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -75,7 +75,7 @@
 							"response": []
 						}
 					],
-					"_postman_id": "e216c09d-7f47-4fce-baec-9502684c319c",
+					"id": "e216c09d-7f47-4fce-baec-9502684c319c",
 					"auth": {
 						"type": "noauth"
 					},
@@ -100,15 +100,14 @@
 								"id": "c11addeb-ed7e-4a86-aaa2-fda2698e5f0c"
 							}
 						}
-					],
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Users",
 					"item": [
 						{
 							"name": "/users",
-							"_postman_id": "d5841b41-649e-40f7-b9ba-7c121b646992",
+							"id": "d5841b41-649e-40f7-b9ba-7c121b646992",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -121,7 +120,7 @@
 						},
 						{
 							"name": "/users/{id}",
-							"_postman_id": "d5450f8f-6580-433b-a490-a55d74112a6f",
+							"id": "d5450f8f-6580-433b-a490-a55d74112a6f",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -134,7 +133,7 @@
 						},
 						{
 							"name": "/users/{id}",
-							"_postman_id": "fdb1aa69-ef68-411b-9dee-2ee2d0143231",
+							"id": "fdb1aa69-ef68-411b-9dee-2ee2d0143231",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -155,7 +154,7 @@
 							"response": []
 						}
 					],
-					"_postman_id": "5490bfd2-16c1-46ff-aa5a-bd2eee4baead",
+					"id": "5490bfd2-16c1-46ff-aa5a-bd2eee4baead",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -177,15 +176,14 @@
 								"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
 							}
 						}
-					],
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Tasks",
 					"item": [
 						{
 							"name": "/tasks",
-							"_postman_id": "3a96d037-30de-4a41-8822-0be6509b985d",
+							"id": "3a96d037-30de-4a41-8822-0be6509b985d",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -198,7 +196,7 @@
 						},
 						{
 							"name": "/tasks/{id}",
-							"_postman_id": "ba28a073-3f01-4849-9685-ea3c0def2c6c",
+							"id": "ba28a073-3f01-4849-9685-ea3c0def2c6c",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -211,7 +209,7 @@
 						},
 						{
 							"name": "/tasks/{id}",
-							"_postman_id": "714fa54e-7bb0-48e4-b857-e05a6cc83f0d",
+							"id": "714fa54e-7bb0-48e4-b857-e05a6cc83f0d",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -233,7 +231,7 @@
 						},
 						{
 							"name": "/tasks",
-							"_postman_id": "f8dbc9f5-c657-4149-8b37-d38096834aa6",
+							"id": "f8dbc9f5-c657-4149-8b37-d38096834aa6",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -254,11 +252,262 @@
 							"response": []
 						}
 					],
-					"_postman_id": "74668b6c-7867-4f22-97e5-6a5ed46f184f",
-					"_postman_isSubFolder": true
+					"id": "74668b6c-7867-4f22-97e5-6a5ed46f184f"
+				},
+				{
+					"name": "Test",
+					"item": [
+						{
+							"name": "Auth",
+							"item": [
+								{
+									"name": "/auth/signin",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"id": "4e8e71b2-cff0-498a-aa03-26d7ae534cad",
+												"exec": [
+													"var jsonData = pm.response.json();",
+													"pm.globals.set(\"accessToken\", jsonData.accessToken);"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"id": "15e2f45f-5f9c-4663-a828-27f7c618776b",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/auth/signin"
+									},
+									"response": []
+								},
+								{
+									"name": "/auth/signup",
+									"id": "3867d023-f898-4b01-8ba3-b30e44a5e9a2",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"kyndall\",\n    \"password\": \"password\",\n    \"email\": \"kyndal@gmail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/auth/signup"
+									},
+									"response": []
+								}
+							],
+							"id": "aa919926-b24d-462d-b283-9922810c2af2",
+							"auth": {
+								"type": "noauth"
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "17142d62-8c12-46c5-b216-666b954fd7c3"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "c11addeb-ed7e-4a86-aaa2-fda2698e5f0c"
+									}
+								}
+							]
+						},
+						{
+							"name": "Users",
+							"item": [
+								{
+									"name": "/users",
+									"id": "d73a1db4-fc3c-43d6-8c6a-cd4d58947fa3",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/users"
+									},
+									"response": []
+								},
+								{
+									"name": "/users/{id}",
+									"id": "8d905aba-10c2-4b16-a6aa-b8e96be386c7",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/users/1"
+									},
+									"response": []
+								},
+								{
+									"name": "/users/{id}",
+									"id": "d83c5adb-be44-4ddd-849d-a8657a85a9ac",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"mike\",\n    \"email\": \"mike@gmail.com\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/users/2"
+									},
+									"response": []
+								}
+							],
+							"id": "9bebe25f-3339-4074-b26b-7fe3b093cd95",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										],
+										"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
+									}
+								}
+							]
+						},
+						{
+							"name": "Tasks",
+							"item": [
+								{
+									"name": "/tasks",
+									"id": "31c85b17-fca5-4365-b289-9c9077de4015",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/tasks"
+									},
+									"response": []
+								},
+								{
+									"name": "/tasks/{id}",
+									"id": "17542290-a3a3-4f3f-8568-9bfd34b7b1e3",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{deploymentURL}}/tasks/1"
+									},
+									"response": []
+								},
+								{
+									"name": "/tasks/{id}",
+									"id": "3b7cb93c-9de2-40ec-8beb-77fd4110cd8a",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Task 2\",\n    \"description\": \"New Task 2 Description\",\n    \"userId\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/tasks/2"
+									},
+									"response": []
+								},
+								{
+									"name": "/tasks",
+									"id": "c0abd2f8-9b01-4e4b-ac31-ca605b3436c5",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"title\": \"Task 2\",\n    \"description\": \"Task 2 Description\",\n    \"userId\": 2\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{deploymentURL}}/tasks"
+									},
+									"response": []
+								}
+							],
+							"id": "97f1ac15-ac55-47ef-afbd-87b931af92bb"
+						}
+					],
+					"id": "79773baf-21dd-4cc0-9ce8-c9d5eb9f9962"
 				}
 			],
-			"_postman_id": "60ed81b9-896c-4596-89da-cce0cb8a155c"
+			"id": "60ed81b9-896c-4596-89da-cce0cb8a155c"
 		},
 		{
 			"name": "Local",
@@ -281,7 +530,7 @@
 									}
 								}
 							],
-							"_postman_id": "e8522195-8561-46e9-96e2-d7c9f4ad8c2c",
+							"id": "e8522195-8561-46e9-96e2-d7c9f4ad8c2c",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -306,7 +555,7 @@
 						},
 						{
 							"name": "/auth/signup",
-							"_postman_id": "e4940714-4915-419f-9f53-e2fa1136fbac",
+							"id": "e4940714-4915-419f-9f53-e2fa1136fbac",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -330,7 +579,7 @@
 							"response": []
 						}
 					],
-					"_postman_id": "bc63e237-2d28-4307-9326-d53413333a52",
+					"id": "bc63e237-2d28-4307-9326-d53413333a52",
 					"auth": {
 						"type": "noauth"
 					},
@@ -355,15 +604,14 @@
 								"id": "c11addeb-ed7e-4a86-aaa2-fda2698e5f0c"
 							}
 						}
-					],
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Users",
 					"item": [
 						{
 							"name": "/users",
-							"_postman_id": "c970a0f7-95f0-474c-b369-5fad0c5ae131",
+							"id": "c970a0f7-95f0-474c-b369-5fad0c5ae131",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -376,7 +624,7 @@
 						},
 						{
 							"name": "/users/{id}",
-							"_postman_id": "510a6017-07c5-432c-8de6-87d395f0e031",
+							"id": "510a6017-07c5-432c-8de6-87d395f0e031",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -389,7 +637,7 @@
 						},
 						{
 							"name": "/users/{id}",
-							"_postman_id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
+							"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -410,7 +658,7 @@
 							"response": []
 						}
 					],
-					"_postman_id": "e37f14f8-c47c-4a8e-b3ef-9ea3de73ab74",
+					"id": "e37f14f8-c47c-4a8e-b3ef-9ea3de73ab74",
 					"event": [
 						{
 							"listen": "prerequest",
@@ -432,15 +680,14 @@
 								"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
 							}
 						}
-					],
-					"_postman_isSubFolder": true
+					]
 				},
 				{
 					"name": "Tasks",
 					"item": [
 						{
 							"name": "/tasks",
-							"_postman_id": "6e456027-6494-44fe-b513-d83baa4545ac",
+							"id": "6e456027-6494-44fe-b513-d83baa4545ac",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -453,7 +700,7 @@
 						},
 						{
 							"name": "/tasks/{id}",
-							"_postman_id": "93580f4a-0706-4c13-9b19-9f9bb2fdefb9",
+							"id": "93580f4a-0706-4c13-9b19-9f9bb2fdefb9",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -466,7 +713,7 @@
 						},
 						{
 							"name": "/tasks/{id}",
-							"_postman_id": "240cbe32-f082-4c60-a87e-5d92f8b92887",
+							"id": "240cbe32-f082-4c60-a87e-5d92f8b92887",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -488,7 +735,7 @@
 						},
 						{
 							"name": "/tasks",
-							"_postman_id": "34f8ad18-0cf8-491b-b81e-2f56bd10bd99",
+							"id": "34f8ad18-0cf8-491b-b81e-2f56bd10bd99",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
 							},
@@ -509,11 +756,10 @@
 							"response": []
 						}
 					],
-					"_postman_id": "10e53d3c-ceda-463b-a91a-5124a4d4a43d",
-					"_postman_isSubFolder": true
+					"id": "10e53d3c-ceda-463b-a91a-5124a4d4a43d"
 				}
 			],
-			"_postman_id": "433b2247-b61d-47e9-ab0e-5fe9a1d875bf"
+			"id": "433b2247-b61d-47e9-ab0e-5fe9a1d875bf"
 		}
 	],
 	"auth": {
