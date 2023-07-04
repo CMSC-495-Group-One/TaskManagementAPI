@@ -12,15 +12,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Java
+      - name: Set up Java and Maven
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
-          
-      - name: Set up Maven
-        uses: actions/setup-maven@v2
-        with:
           maven-version: '3.8.4'
 
       - name: Build with Maven
