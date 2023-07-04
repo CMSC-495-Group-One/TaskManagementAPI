@@ -1,4 +1,4 @@
-name: Deploy to Review App
+name: Deploy to Heroku Review App
 
 on:
   pull_request:
@@ -12,38 +12,34 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "task-management-api-test-${{ github.event.pull_request.number }}"
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          healthcheck: "https://task-management-api-test-${{ github.event.pull_request.number }}.herokuapp.com"
-          rollbackonhealthcheckfailed: true
-          usedocker: false
-          appdir: "."
-          env: DATABASE_URL=${{ secrets.DB_URL }},DATABASE_USERNAME=${{ secrets.DB_USERNAME }},DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }}
+          node-version: 14
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Deploy to Heroku
+        run: |
+          heroku container:login
+          heroku container:push web --app "task-management-api-test-${{ github.event.pull_request.number }}"
+          heroku container:release web --app "task-management-api-test-${{ github.event.pull_request.number }}"
 
       - name: Comment PR
         uses: actions/github-script@v5
         with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const issue_number = context.payload.pull_request.number;
             const repository = context.repo;
             const app_url = `https://task-management-api-test-${issue_number}.herokuapp.com`;
             const message = `Deployed to [Heroku Review App](${app_url}).`;
+            github.rest.issues.createComment({...repository, issue_number, body: message});
 
-            // Fetch all comments of the issue
-            const comments = await github.rest.issues.listComments({...repository, issue_number});
-
-            // Find a comment by this GitHub Actions bot
-            const botComment = comments.data.find(comment => comment.user.login === 'github-actions[bot]' && comment.body.includes('Deployed to'));
-
-            if (botComment) {
-              // If found, update the comment
-              await github.rest.issues.updateComment({...repository, comment_id: botComment.id, body: message});
-            } else {
-              // If not found, create a new comment
-              await github.rest.issues.createComment({...repository, issue_number, body: message});
-            }
+      - name: Schedule App Deletion
+        uses: peter-evans/schedule-delete-heroku-app@v1
+        with:
+          app: "task-management-api-test-${{ github.event.pull_request.number }}"
+          days: 5
+          token: ${{ secrets.HEROKU_API_KEY }}
