@@ -206,7 +206,7 @@
 									"request": {
 										"method": "GET",
 										"header": [],
-										"url": "{{deploymentURL}}/tasks/1"
+										"url": "{{testURL}}/tasks/1"
 									},
 									"response": []
 								},
