@@ -1,0 +1,35 @@
+name: Deploy to Review App
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Heroku
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "task-management-api-test-${{ github.event.pull_request.number }}"
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
+          healthcheck: "https://task-management-api-test-${{ github.event.pull_request.number }}.herokuapp.com"
+          rollbackonhealthcheckfailed: true
+          usedocker: true
+          env: DATABASE_URL=${{ secrets.DB_URL }},DATABASE_USERNAME=${{ secrets.DB_USERNAME }},DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }}
+
+      - name: Comment PR
+        uses: actions/github-script@v5
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            const issue_number = context.payload.pull_request.number;
+            const repository = context.repo;
+            const app_url = `https://task-management-api-test-${issue_number}.herokuapp.com`;
+            const message = `Deployed to [Heroku Review App](${app_url}).`;
+            github.rest.issues.createComment({...repository, issue_number, body: message});
