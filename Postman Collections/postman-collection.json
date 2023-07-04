@@ -250,7 +250,7 @@
 												}
 											}
 										},
-										"url": "{{deploymentURL}}/tasks"
+										"url": "{{testURL}}/tasks"
 									},
 									"response": []
 								}
