@@ -19,10 +19,9 @@ jobs:
           distribution: 'adopt'
           
       - name: Set up Maven
-        uses: actions/setup-java@v2
+        uses: actions/setup-maven@v2
         with:
-          java-version: '11'
-          distribution: 'maven'
+          maven-version: '3.8.4'
 
       - name: Build with Maven
         run: mvn clean install
