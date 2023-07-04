@@ -29,6 +29,6 @@ jobs:
           heroku_app_name: task-management-api-test
           heroku_email: connor.d.burge@gmail.com
           env_vars: |
-            DB_URL=${{ secrets.DB_URL }}
-            DB_USERNAME=${{ secrets.DB_USERNAME }}
-            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
+            DATABASE_URL=${{ secrets.DB_URL }}
+            DATABASE_USERNAME=${{ secrets.DB_USERNAME }}
+            DATABASE_PASSWORD=${{ secrets.DB_PASSWORD }}
