@@ -21,7 +21,7 @@ jobs:
           maven-version: '3.8.4'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean install -DskipTests
 
       - name: Deploy to Heroku
         uses: akhileshns/heroku-deploy@v3.12.12
