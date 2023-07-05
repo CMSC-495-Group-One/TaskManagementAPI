@@ -25,13 +25,13 @@ jobs:
       - name: Retrieve App URL
         id: app_url
         run: |
-          DEPLOYMENT_URL=$(curl -s "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/deployments" | jq -r '.[0].payload.environment_url')
+          DEPLOYMENT_URL=$(curl -s "https://api.github.com/repos/${{ github.repository }}/pulls/${{ github.event.pull_request.number }}/deployments" | jq -r 'if length > 0 then .[0].payload.environment_url else empty end')
 
           echo "::set-env name=APP_URL::$DEPLOYMENT_URL"
 
       - name: Comment PR
         id: comment
-        if: steps.wait.outputs.status == 'success'
+        if: steps.wait.outputs.status == 'success' && steps.app_url.outputs.deployment_url != 'null'
         uses: actions/github-script@v5
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
