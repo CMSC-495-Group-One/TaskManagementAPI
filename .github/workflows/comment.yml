@@ -1,0 +1,45 @@
+name: Post Review App
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  Review-App:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Retrieve App URL
+        id: app_url
+        run: |
+          echo "::set-env name=APP_URL::https://task-management-api-test-${{ github.head_ref }}.herokuapp.com"
+
+      - name: Wait for Heroku Review App Deployment
+        id: wait
+        run: |
+          echo "Waiting for Heroku Review App deployment..."
+          STATUS=$(heroku status --app "task-management-api-test-${{ github.head_ref }}" | awk 'NR==2 {print $2}')
+          while [ "$STATUS" != "succeeded" ]; do
+            echo "Deployment status: $STATUS"
+            sleep 30
+            STATUS=$(heroku status --app "task-management-api-test-${{ github.head_ref }}" | awk 'NR==2 {print $2}')
+          done
+
+      - name: Comment PR
+        id: comment
+        if: steps.wait.outputs.status == 'succeeded'
+        uses: unsplash/comment-on-pr@v1
+        with:
+          message: |
+            Deployed to [Heroku Review App](${{ env.APP_URL }}).
+
+      - name: Update Comment
+        if: steps.comment.outputs.comment_id != '' && steps.wait.outputs.status == 'succeeded'
+        uses: unsplash/update-pr-comment@v1
+        with:
+          comment-id: ${{ steps.comment.outputs.comment_id }}
+          message: |
+            Deployed to [Heroku Review App](${{ env.APP_URL }}).
