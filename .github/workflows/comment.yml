@@ -5,7 +5,7 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  Review-App:
+  Review-App-URL:
     runs-on: ubuntu-latest
 
     steps:
