@@ -12,25 +12,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component
-public class UserSeeder implements CommandLineRunner {
+public class DatabaseSeed implements CommandLineRunner {
 
     private final JdbcTemplate jdbcTemplate;
     private final WebClient webClient;
     private final Environment env;
 
-    public UserSeeder(JdbcTemplate jdbcTemplate, WebClient.Builder webClientBuilder, Environment env) {
+    public DatabaseSeed(JdbcTemplate jdbcTemplate, WebClient.Builder webClientBuilder, Environment env) {
         this.jdbcTemplate = jdbcTemplate;
         this.webClient = webClientBuilder.baseUrl(env.getProperty("app.base-url")).build();
         this.env = env;
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        jdbcTemplate.execute("INSERT INTO roles (name) SELECT 'ADMIN' WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = 'ADMIN')");
-        jdbcTemplate.execute("INSERT INTO roles (name) SELECT 'USER' WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = 'USER')");
+    public static void signUpUsers(JdbcTemplate jdbcTemplate, WebClient webClient) {
+        String sql = "SELECT COUNT(*) FROM app_users WHERE username = ?";
 
-        String sql1 = "SELECT COUNT(*) FROM app_users WHERE username = ?";
-        Integer count1 = jdbcTemplate.queryForObject(sql1, new Object[]{"admin"}, Integer.class);
+        Integer count1 = jdbcTemplate.queryForObject(sql, new Object[]{"admin"}, Integer.class);
         if(count1 == 0) {
             Map<String, Object> map = new HashMap<>();
             map.put("username", "admin");
@@ -45,8 +42,7 @@ public class UserSeeder implements CommandLineRunner {
                     .block();
         }
 
-        String sql2 = "SELECT COUNT(*) FROM app_users WHERE username = ?";
-        Integer count2 = jdbcTemplate.queryForObject(sql2, new Object[]{"john"}, Integer.class);
+        Integer count2 = jdbcTemplate.queryForObject(sql, new Object[]{"john"}, Integer.class);
         if(count2 == 0) {
             Map<String, Object> map = new HashMap<>();
             map.put("username", "john");
@@ -60,6 +56,20 @@ public class UserSeeder implements CommandLineRunner {
                     .bodyToMono(Void.class)
                     .block();
         }
+    }
+
+    @Override
+    public void run(String... args) {
+        // Insert ADMIN and USER role
+        jdbcTemplate.execute("INSERT INTO roles (name) SELECT 'ADMIN' WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = 'ADMIN')");
+        jdbcTemplate.execute("INSERT INTO roles (name) SELECT 'USER' WHERE NOT EXISTS (SELECT 1 FROM roles WHERE name = 'USER')");
+        // Sign two users up
+        signUpUsers(jdbcTemplate, webClient);
+        // Assign ADMIN to admin user
+        jdbcTemplate.execute("INSERT INTO user_roles (user_id, role_id) SELECT app_users.id, roles.id FROM app_users JOIN roles ON roles.name = 'ADMIN' WHERE app_users.username = 'admin'");
+        // Create two tasks and assign to admin and john
+        jdbcTemplate.execute("INSERT INTO tasks (title, description, user_id) SELECT 'Task 1', 'Description of Task 1', app_users.id FROM app_users WHERE app_users.username = 'admin'");
+        jdbcTemplate.execute("INSERT INTO tasks (title, description, user_id) SELECT 'Task 2', 'Description of Task 2', app_users.id FROM app_users WHERE app_users.username = 'john'");
     }
 }
 
