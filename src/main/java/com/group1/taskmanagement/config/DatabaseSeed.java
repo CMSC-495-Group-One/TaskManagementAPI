@@ -90,7 +90,6 @@ public class DatabaseSeed implements CommandLineRunner {
                 "LEFT JOIN tasks ON tasks.user_id = app_users.id AND tasks.title = 'Task 2' " +
                 "WHERE app_users.username = 'john' AND tasks.id IS NULL";
         jdbcTemplate.execute(task2Sql);
-
     }
 }
 
