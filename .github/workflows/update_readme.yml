@@ -30,5 +30,6 @@ jobs:
           git add README.md
           git diff --quiet && git diff --staged --quiet || git commit -m "Update endpoints in README"
           git push
-        env:
-          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
+          
+          export GITHUB_TOKEN=${{ secrets.PAT_TOKEN }}
+          git push origin HEAD:main
