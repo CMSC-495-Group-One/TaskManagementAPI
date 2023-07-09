@@ -32,5 +32,9 @@ jobs:
           
       - name: Force push changes
         run: |
-          export GITHUB_TOKEN=${{ secrets.PAT_TOKEN }}
+          echo ${{ secrets.PAT_TOKEN }} > token.txt
+          export GIT_SSH_COMMAND="ssh -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no"
+          export PAT_TOKEN=$(cat token.txt)
           git push --force origin HEAD:main
+        env:
+          PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
