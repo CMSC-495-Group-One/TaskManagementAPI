@@ -22,3 +22,11 @@ jobs:
       - name: Run update_readme.py script
         run: |
           python .github/update_readme.py
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "connor.d.burge@gmail.com"
+          git config --local user.name "ConnorDBurge"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update endpoints in README"
+          git push
