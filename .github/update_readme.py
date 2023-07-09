@@ -1,7 +1,7 @@
 import re
 import os
 
-directory_path = "../src/main/java/com/group1/taskmanagement/controller/"
+directory_path = "src/main/java/com/group1/taskmanagement/controller/"
 readme_path = "README.md"
 
 # These are the annotations that define endpoints
