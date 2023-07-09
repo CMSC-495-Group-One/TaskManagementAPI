@@ -75,6 +75,10 @@ This is for your convenience. You won’t need to copy and paste it anywhere.
 - If you receive a status `401`, the API is properly working. You just need a new token. See **Obtaining an authentication token** section.
 - If you receive a status `500`, there was an internal server error. Attempt to create a new user using the `/v1/auth/signup` endpoint. If you receive a status `2xx`, you can sign in using step 1 in **Obtaining an authentication token** section. Otherwise, there is a bug.
 
+## Endpoints
+<!-- ENDPOINTS_START -->
+<!-- ENDPOINTS_END -->
+
 ## Built With
 
 - [Spring Boot](https://spring.io/projects/spring-boot) - The web framework used
