@@ -32,4 +32,5 @@ jobs:
           
       - name: Force push changes
         run: |
+          export GITHUB_TOKEN=${{ secrets.PAT_TOKEN }}
           git push --force origin HEAD:main
