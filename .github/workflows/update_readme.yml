@@ -21,4 +21,4 @@ jobs:
 
       - name: Run update_readme.py script
         run: |
-          python ../update_readme.py
+          python .github/update_readme.py
