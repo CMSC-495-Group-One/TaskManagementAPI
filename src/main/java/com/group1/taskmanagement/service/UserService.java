@@ -3,6 +3,9 @@ package com.group1.taskmanagement.service;
 import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.UserRepository;
+import com.group1.taskmanagement.security.CustomUserDetails;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,11 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    public User getCurrentUser() {
+        CustomUserDetails customUser = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userRepository.findById(customUser.getId()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
     public List<UserDto> findAll() {
