@@ -4,6 +4,7 @@ import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.UserRepository;
 import com.group1.taskmanagement.security.CustomUserDetails;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,12 @@ public class UserService {
         return User.toDto(user);
     }
 
-    public UserDto updateUser(Long id, UserDto user) {
+    public UserDto updateUser(Long id, UserDto user, User currentUser) {
         User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (!(currentUser.getId().equals(existingUser.getId()) || currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN")))) {
+            throw new AccessDeniedException("User not authorized to update this user");
+        }
 
         try {
             ObjectUpdater.updateObject(existingUser, User.fromDto(user));
