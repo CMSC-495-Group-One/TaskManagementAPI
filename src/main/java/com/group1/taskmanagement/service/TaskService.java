@@ -8,6 +8,7 @@ import com.group1.taskmanagement.repository.UserRepository;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,7 @@ public class TaskService {
         User user = userRepository.findById(taskDto.getUserId())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + taskDto.getUserId()));
         Task newTask = Task.fromDto(taskDto, user);
+        newTask.setCreatedDate(LocalDateTime.now());
         taskRepository.save(newTask);
     }
 
@@ -60,6 +62,8 @@ public class TaskService {
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Failed to update task");
         }
+
+        existingTask.setUpdatedDate(LocalDateTime.now());
 
         Task updatedTask = taskRepository.save(existingTask);
         return Task.toDto(updatedTask);
