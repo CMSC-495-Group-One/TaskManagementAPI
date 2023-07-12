@@ -78,14 +78,15 @@ public class DatabaseSeed implements CommandLineRunner {
         jdbcTemplate.execute(assignAdminRoleSql);
 
         // Create two tasks and assign to admin and john
-        String task1Sql = "INSERT INTO tasks (title, description, user_id) " +
-                "SELECT 'Task 1', 'Description of Task 1', app_users.id " +
+        String task1Sql = "INSERT INTO tasks (title, description, user_id, status, created_date, due_date) " +
+                "SELECT 'Task 1', 'Description of Task 1', app_users.id, 'TO_DO', CURRENT_TIMESTAMP, CURRENT_DATE + 7 " +
                 "FROM app_users " +
                 "LEFT JOIN tasks ON tasks.user_id = app_users.id AND tasks.title = 'Task 1' " +
                 "WHERE app_users.username = 'admin' AND tasks.id IS NULL";
         jdbcTemplate.execute(task1Sql);
-        String task2Sql = "INSERT INTO tasks (title, description, user_id) " +
-                "SELECT 'Task 2', 'Description of Task 2', app_users.id " +
+
+        String task2Sql = "INSERT INTO tasks (title, description, user_id, status, created_date, due_date) " +
+                "SELECT 'Task 2', 'Description of Task 2', app_users.id, 'IN_PROGRESS', CURRENT_TIMESTAMP, CURRENT_DATE + 7 " +
                 "FROM app_users " +
                 "LEFT JOIN tasks ON tasks.user_id = app_users.id AND tasks.title = 'Task 2' " +
                 "WHERE app_users.username = 'john' AND tasks.id IS NULL";
