@@ -28,7 +28,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         com.group1.taskmanagement.model.User user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("Username not found"));
-        return new User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
+        return new CustomUserDetails(user, mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<GrantedAuthority> mapRolesToAuthorities(List<Role> roles) {

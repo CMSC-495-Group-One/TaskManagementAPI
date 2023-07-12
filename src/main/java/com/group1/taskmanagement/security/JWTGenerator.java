@@ -16,12 +16,18 @@ public class JWTGenerator {
     private static final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     public String generateToken(Authentication authentication) {
-        String username = authentication.getName();
         Date currentDate = new Date();
         Date expirationDate = new Date(currentDate.getTime() + SecurityConstants.JWT_EXPIRATION);
 
+        CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
+        String username = userDetails.getUsername();
+        Long id = userDetails.getId();
+        String email = userDetails.getEmail();
+
         String token = Jwts.builder()
                 .setSubject(username)
+                .claim("userId", id)
+                .claim("email", email)
                 .setIssuedAt(new Date())
                 .setExpiration(expirationDate)
                 .signWith(key, SignatureAlgorithm.HS512)
