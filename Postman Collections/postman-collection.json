@@ -437,6 +437,82 @@
 					]
 				},
 				{
+					"name": "Roles",
+					"item": [
+						{
+							"name": "/users",
+							"id": "44f8ae2a-3e9c-45b0-8701-846bc96488c7",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{localURL}}/users"
+							},
+							"response": []
+						},
+						{
+							"name": "/users/{id}",
+							"id": "16782534-05a8-4f73-9bc5-78c9c48decca",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{localURL}}/users/1"
+							},
+							"response": []
+						},
+						{
+							"name": "/users/{id}",
+							"id": "9d732200-3723-4b64-a79a-17379a32707d",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"mike\",\n    \"email\": \"mike@gmail.com\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{localURL}}/users/2"
+							},
+							"response": []
+						}
+					],
+					"id": "341008f7-ccaa-496c-9d1f-f9e9d0d9562c",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								],
+								"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								],
+								"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
+							}
+						}
+					]
+				},
+				{
 					"name": "Tasks",
 					"item": [
 						{
