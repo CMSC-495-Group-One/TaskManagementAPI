@@ -161,14 +161,14 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"mike3\",\n    \"email\": \"mike@gmail.com\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base-url}}/users/2"
+						"url": "{{base-url}}/users/2/tasks"
 					},
 					"response": []
 				},
