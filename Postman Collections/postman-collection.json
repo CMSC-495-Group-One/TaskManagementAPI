@@ -35,7 +35,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
+							"raw": "{\n    \"username\": \"john\",\n    \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
