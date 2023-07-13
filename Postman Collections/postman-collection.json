@@ -403,6 +403,19 @@
 							"response": []
 						},
 						{
+							"name": "/users/{id}/roles",
+							"id": "5d63ab05-70ba-45a3-b16f-dc069e5af487",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{localURL}}/users/1"
+							},
+							"response": []
+						},
+						{
 							"name": "/users/{id}",
 							"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
 							"protocolProfileBehavior": {
