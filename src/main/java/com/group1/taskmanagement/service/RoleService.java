@@ -58,10 +58,9 @@ public class RoleService {
         Role role = roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
         for (User user : users) {
             user.getRoles().remove(role);
-            userRepository.save(user); // update the user in the database
+            userRepository.save(user);
         }
 
-        // finally, delete the role
         roleRepository.deleteById(id);
 
         return ResponseEntity.noContent().build();
