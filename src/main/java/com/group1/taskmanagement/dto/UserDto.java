@@ -14,7 +14,7 @@ public class UserDto {
     private Long id;
     private String username;
     private String email;
-    private List<TaskDto> tasks = new ArrayList<>();
-    private List<RoleDto> roles = new ArrayList<>();
+    private List<Long> tasks = new ArrayList<>();
+    private List<String> roles = new ArrayList<>();
 
 }

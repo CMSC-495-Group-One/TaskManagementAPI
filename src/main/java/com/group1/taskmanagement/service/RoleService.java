@@ -2,7 +2,10 @@ package com.group1.taskmanagement.service;
 
 import com.group1.taskmanagement.dto.RoleDto;
 import com.group1.taskmanagement.model.Role;
+import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.RoleRepository;
+import com.group1.taskmanagement.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.stream.Collectors;
 public class RoleService {
 
     private final RoleRepository roleRepository;
+    private final UserRepository userRepository;
 
-    public RoleService(RoleRepository roleRepository) {
+    public RoleService(RoleRepository roleRepository, UserRepository userRepository) {
         this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     public List<RoleDto> findAll() {
@@ -41,5 +46,24 @@ public class RoleService {
         ObjectUpdater.updateObject(exsistingRole, updatedRoleFromDto);
         Role updatedRole = roleRepository.save(exsistingRole);
         return Role.toDto(updatedRole);
+    }
+
+    public ResponseEntity<Void> deleteById(Long id) {
+        if (!roleRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+
+        List<User> users = userRepository.findAllByRoles_Id(id);;
+
+        Role role = roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
+        for (User user : users) {
+            user.getRoles().remove(role);
+            userRepository.save(user); // update the user in the database
+        }
+
+        // finally, delete the role
+        roleRepository.deleteById(id);
+
+        return ResponseEntity.noContent().build();
     }
 }

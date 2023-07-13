@@ -3,6 +3,7 @@ package com.group1.taskmanagement.service;
 import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,5 +41,13 @@ public class UserService {
 
         User updatedUser = userRepository.save(existingUser);
         return User.toDto(updatedUser);
+    }
+
+    public ResponseEntity<Void> deleteById(Long id) {
+        if (!userRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        userRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
