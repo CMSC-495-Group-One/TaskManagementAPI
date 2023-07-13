@@ -472,7 +472,7 @@
 								"disableBodyPruning": true
 							},
 							"request": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -483,7 +483,7 @@
 										}
 									}
 								},
-								"url": "{{localURL}}/roles/2"
+								"url": "{{localURL}}/roles"
 							},
 							"response": []
 						}
