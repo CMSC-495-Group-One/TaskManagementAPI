@@ -427,7 +427,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"New Task 3\",\n    \"description\": \"New Task 3 Description\",\n    \"status\": \"TO_DO\",\n    \"dueDate\": \"2023-07-25T00:00:00\"\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
