@@ -466,6 +466,19 @@
 							"response": []
 						},
 						{
+							"name": "/roles/{id}",
+							"id": "b7e947aa-2ea1-4931-956b-72438d8e1079",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{localURL}}/roles/1"
+							},
+							"response": []
+						},
+						{
 							"name": "/roles",
 							"id": "9d732200-3723-4b64-a79a-17379a32707d",
 							"protocolProfileBehavior": {
