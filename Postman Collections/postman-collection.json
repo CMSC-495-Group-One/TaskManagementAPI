@@ -351,7 +351,7 @@
 					"response": []
 				},
 				{
-					"name": "/tasks/{id} Copy",
+					"name": "/tasks/{id}",
 					"id": "3ad1f038-df47-4f3f-85c8-fba7f3b54532",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
