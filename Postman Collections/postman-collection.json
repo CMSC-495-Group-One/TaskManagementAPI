@@ -303,7 +303,7 @@
 										}
 									}
 								},
-								"url": "{{localURL}}/auth/signin"
+								"url": "{{base-url}}/auth/signin"
 							},
 							"response": []
 						},
@@ -474,7 +474,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{localURL}}/roles"
+								"url": "{{base-url}}/roles"
 							},
 							"response": []
 						},
@@ -487,7 +487,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{localURL}}/roles/1"
+								"url": "{{base-url}}/roles/1"
 							},
 							"response": []
 						},
@@ -509,7 +509,7 @@
 										}
 									}
 								},
-								"url": "{{localURL}}/roles/1"
+								"url": "{{base-url}}/roles/1"
 							},
 							"response": []
 						},
@@ -531,7 +531,7 @@
 										}
 									}
 								},
-								"url": "{{localURL}}/roles"
+								"url": "{{base-url}}/roles"
 							},
 							"response": []
 						}
@@ -572,7 +572,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{localURL}}/tasks"
+								"url": "{{base-url}}/tasks"
 							},
 							"response": []
 						},
@@ -585,7 +585,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{localURL}}/tasks/1"
+								"url": "{{base-url}}/tasks/1"
 							},
 							"response": []
 						},
@@ -607,7 +607,7 @@
 										}
 									}
 								},
-								"url": "{{localURL}}/tasks/3"
+								"url": "{{base-url}}/tasks/2"
 							},
 							"response": []
 						},
@@ -629,7 +629,7 @@
 										}
 									}
 								},
-								"url": "{{localURL}}/tasks"
+								"url": "{{base-url}}/tasks"
 							},
 							"response": []
 						}
