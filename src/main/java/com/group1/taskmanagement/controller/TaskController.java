@@ -1,8 +1,11 @@
 package com.group1.taskmanagement.controller;
 
 import com.group1.taskmanagement.dto.TaskDto;
+import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.service.TaskService;
+import com.group1.taskmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,9 +15,11 @@ import java.util.List;
 public class TaskController {
 
     private final TaskService taskService;
+    private final UserService userService;
 
-    public TaskController(TaskService taskService) {
+    public TaskController(TaskService taskService, UserService userService) {
         this.taskService = taskService;
+        this.userService = userService;
     }
 
     @GetMapping
@@ -35,7 +40,8 @@ public class TaskController {
 
     @PutMapping("/{id}")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
-        TaskDto updatedTask = taskService.updateTask(id, taskDto);
+        User currentUser = userService.getCurrentUser();
+        TaskDto updatedTask = taskService.updateTask(id, taskDto, currentUser);
         return ResponseEntity.ok(updatedTask);
     }
 

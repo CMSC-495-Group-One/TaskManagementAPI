@@ -6,6 +6,7 @@ import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.TaskRepository;
 import com.group1.taskmanagement.repository.UserRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -44,9 +45,13 @@ public class TaskService {
         taskRepository.save(newTask);
     }
 
-    public TaskDto updateTask(Long id, TaskDto taskDto) {
+    public TaskDto updateTask(Long id, TaskDto taskDto, User currentUser) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
+
+        if (!(currentUser.getId().equals(existingTask.getUser().getId()) || currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN")))) {
+            throw new AccessDeniedException("User not authorized to update this task");
+        }
 
         Task updatedTaskFromDto;
 

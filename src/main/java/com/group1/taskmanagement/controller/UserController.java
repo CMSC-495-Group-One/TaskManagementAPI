@@ -4,6 +4,7 @@ import com.group1.taskmanagement.dto.RoleDto;
 import com.group1.taskmanagement.dto.TaskDto;
 import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.service.TaskService;
+import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +35,8 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        UserDto updatedTask = userService.updateUser(id, userDto);
+        User currentUser = userService.getCurrentUser();
+        UserDto updatedTask = userService.updateUser(id, userDto, currentUser);
         return ResponseEntity.ok(updatedTask);
     }
 
