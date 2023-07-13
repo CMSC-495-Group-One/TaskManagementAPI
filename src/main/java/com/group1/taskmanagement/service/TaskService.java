@@ -19,10 +19,12 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository, UserService userService) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public List<TaskDto> findAll() {
@@ -45,16 +47,12 @@ public class TaskService {
         taskRepository.save(newTask);
     }
 
-    public TaskDto updateTask(Long id, TaskDto taskDto, User currentUser) {
+    public TaskDto updateTask(Long id, TaskDto taskDto) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-
-        if (!(currentUser.getId().equals(existingTask.getUser().getId()) || currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN")))) {
-            throw new AccessDeniedException("User not authorized to update this task");
-        }
+        userService.hasUserRights(existingTask.getUser().getId());
 
         Task updatedTaskFromDto;
-
         if (taskDto.getUserId() != null) {
             User user = userRepository.findById(taskDto.getUserId())
                     .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + taskDto.getUserId()));
@@ -83,6 +81,7 @@ public class TaskService {
     }
 
     public ResponseEntity<Void> deleteById(Long id) {
+        userService.hasUserRights(id);
         if (!taskRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
