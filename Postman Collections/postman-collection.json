@@ -129,6 +129,28 @@
 					"response": []
 				},
 				{
+					"name": "/users/{id}",
+					"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"mike3\",\n    \"email\": \"mike@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/users/2"
+					},
+					"response": []
+				},
+				{
 					"name": "/users/{id}/tasks",
 					"id": "3a4396ea-de14-4153-a00a-ad60658ea09b",
 					"protocolProfileBehavior": {
@@ -151,28 +173,6 @@
 						"method": "GET",
 						"header": [],
 						"url": "{{base-url}}/users/1"
-					},
-					"response": []
-				},
-				{
-					"name": "/users/{id}",
-					"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"username\": \"mike3\",\n    \"email\": \"mike@gmail.com\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{base-url}}/users/2"
 					},
 					"response": []
 				}
@@ -218,6 +218,28 @@
 					"response": []
 				},
 				{
+					"name": "/roles",
+					"id": "9d732200-3723-4b64-a79a-17379a32707d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"MODERATOR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/roles"
+					},
+					"response": []
+				},
+				{
 					"name": "/roles/{id}",
 					"id": "16782534-05a8-4f73-9bc5-78c9c48decca",
 					"protocolProfileBehavior": {
@@ -253,24 +275,24 @@
 					"response": []
 				},
 				{
-					"name": "/roles",
-					"id": "9d732200-3723-4b64-a79a-17379a32707d",
+					"name": "/roles/{id}",
+					"id": "eb831a81-4fb8-476d-b585-9e50a8271d59",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "POST",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"MODERATOR\"\n}",
+							"raw": "{\n    \"name\": \"ADMIN\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
 								}
 							}
 						},
-						"url": "{{base-url}}/roles"
+						"url": "{{base-url}}/roles/1"
 					},
 					"response": []
 				}
@@ -311,6 +333,28 @@
 					"request": {
 						"method": "GET",
 						"header": [],
+						"url": "{{base-url}}/tasks"
+					},
+					"response": []
+				},
+				{
+					"name": "/tasks",
+					"id": "34f8ad18-0cf8-491b-b81e-2f56bd10bd99",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Task 3\",\n    \"description\": \"Task 3 Description\",\n    \"userId\": 2,\n    \"status\": \"TO_DO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": "{{base-url}}/tasks"
 					},
 					"response": []
@@ -369,28 +413,6 @@
 							}
 						},
 						"url": "{{base-url}}/tasks/2"
-					},
-					"response": []
-				},
-				{
-					"name": "/tasks",
-					"id": "34f8ad18-0cf8-491b-b81e-2f56bd10bd99",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"title\": \"Task 3\",\n    \"description\": \"Task 3 Description\",\n    \"userId\": 2,\n    \"status\": \"TO_DO\"\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": "{{base-url}}/tasks"
 					},
 					"response": []
 				}
