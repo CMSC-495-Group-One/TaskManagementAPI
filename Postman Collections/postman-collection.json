@@ -264,380 +264,374 @@
 			"id": "60ed81b9-896c-4596-89da-cce0cb8a155c"
 		},
 		{
-			"name": "Local",
+			"name": "Auth",
 			"item": [
 				{
-					"name": "Auth",
-					"item": [
+					"name": "/auth/signin",
+					"event": [
 						{
-							"name": "/auth/signin",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"id": "4e8e71b2-cff0-498a-aa03-26d7ae534cad",
-										"exec": [
-											"var jsonData = pm.response.json();",
-											"pm.environment.set(\"accessToken\", jsonData.accessToken);"
-										],
-										"type": "text/javascript"
-									}
-								}
-							],
-							"id": "e8522195-8561-46e9-96e2-d7c9f4ad8c2c",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{base-url}}/auth/signin"
-							},
-							"response": []
-						},
-						{
-							"name": "/auth/signup",
-							"id": "e4940714-4915-419f-9f53-e2fa1136fbac",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{ \"username\": \"user\", \"password\": \"password\", \"email\": \"user@mail.com\" }",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{base-url}}/auth/signup"
-							},
-							"response": []
+							"listen": "test",
+							"script": {
+								"id": "4e8e71b2-cff0-498a-aa03-26d7ae534cad",
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.environment.set(\"accessToken\", jsonData.accessToken);"
+								],
+								"type": "text/javascript"
+							}
 						}
 					],
-					"id": "bc63e237-2d28-4307-9326-d53413333a52",
-					"auth": {
-						"type": "noauth"
+					"id": "e8522195-8561-46e9-96e2-d7c9f4ad8c2c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
 					},
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "17142d62-8c12-46c5-b216-666b954fd7c3"
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
 							}
 						},
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "c11addeb-ed7e-4a86-aaa2-fda2698e5f0c"
-							}
-						}
-					]
+						"url": "{{base-url}}/auth/signin"
+					},
+					"response": []
 				},
 				{
-					"name": "Users",
-					"item": [
-						{
-							"name": "/users",
-							"id": "c970a0f7-95f0-474c-b369-5fad0c5ae131",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/users"
-							},
-							"response": []
+					"name": "/auth/signup",
+					"id": "e4940714-4915-419f-9f53-e2fa1136fbac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
 						},
-						{
-							"name": "/users/{id}",
-							"id": "510a6017-07c5-432c-8de6-87d395f0e031",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/users/1"
-							},
-							"response": []
-						},
-						{
-							"name": "/users/{id}/tasks",
-							"id": "3a4396ea-de14-4153-a00a-ad60658ea09b",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/users/2/tasks"
-							},
-							"response": []
-						},
-						{
-							"name": "/users/{id}/roles",
-							"id": "5d63ab05-70ba-45a3-b16f-dc069e5af487",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/users/1"
-							},
-							"response": []
-						},
-						{
-							"name": "/users/{id}",
-							"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"username\": \"mike3\",\n    \"email\": \"mike@gmail.com\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{base-url}}/users/2"
-							},
-							"response": []
-						}
-					],
-					"id": "e37f14f8-c47c-4a8e-b3ef-9ea3de73ab74",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \"username\": \"user\", \"password\": \"password\", \"email\": \"user@mail.com\" }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
 							}
 						},
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
-							}
-						}
-					]
-				},
-				{
-					"name": "Roles",
-					"item": [
-						{
-							"name": "/roles",
-							"id": "44f8ae2a-3e9c-45b0-8701-846bc96488c7",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/roles"
-							},
-							"response": []
-						},
-						{
-							"name": "/roles/{id}",
-							"id": "16782534-05a8-4f73-9bc5-78c9c48decca",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/roles/2"
-							},
-							"response": []
-						},
-						{
-							"name": "/roles/{id}",
-							"id": "b7e947aa-2ea1-4931-956b-72438d8e1079",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"ADMIN\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{base-url}}/roles/1"
-							},
-							"response": []
-						},
-						{
-							"name": "/roles",
-							"id": "9d732200-3723-4b64-a79a-17379a32707d",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"name\": \"MODERATOR\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{base-url}}/roles"
-							},
-							"response": []
-						}
-					],
-					"id": "341008f7-ccaa-496c-9d1f-f9e9d0d9562c",
-					"event": [
-						{
-							"listen": "prerequest",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
-							}
-						},
-						{
-							"listen": "test",
-							"script": {
-								"type": "text/javascript",
-								"exec": [
-									""
-								],
-								"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
-							}
-						}
-					]
-				},
-				{
-					"name": "Tasks",
-					"item": [
-						{
-							"name": "/tasks",
-							"id": "6e456027-6494-44fe-b513-d83baa4545ac",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/tasks"
-							},
-							"response": []
-						},
-						{
-							"name": "/tasks/{id}",
-							"id": "93580f4a-0706-4c13-9b19-9f9bb2fdefb9",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "GET",
-								"header": [],
-								"url": "{{base-url}}/tasks/1"
-							},
-							"response": []
-						},
-						{
-							"name": "/tasks/{id}",
-							"id": "240cbe32-f082-4c60-a87e-5d92f8b92887",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "PUT",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"title\": \"New Task 3\",\n    \"description\": \"New Task 3 Description\",\n    \"status\": \"TO_DO\",\n    \"dueDate\": \"2023-07-25T00:00:00\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{base-url}}/tasks/2"
-							},
-							"response": []
-						},
-						{
-							"name": "/tasks",
-							"id": "34f8ad18-0cf8-491b-b81e-2f56bd10bd99",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\n    \"title\": \"Task 3\",\n    \"description\": \"Task 3 Description\",\n    \"userId\": 2,\n    \"status\": \"TO_DO\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": "{{base-url}}/tasks"
-							},
-							"response": []
-						}
-					],
-					"id": "10e53d3c-ceda-463b-a91a-5124a4d4a43d"
+						"url": "{{base-url}}/auth/signup"
+					},
+					"response": []
 				}
 			],
-			"id": "433b2247-b61d-47e9-ab0e-5fe9a1d875bf"
+			"id": "bc63e237-2d28-4307-9326-d53413333a52",
+			"auth": {
+				"type": "noauth"
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "17142d62-8c12-46c5-b216-666b954fd7c3"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "c11addeb-ed7e-4a86-aaa2-fda2698e5f0c"
+					}
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "/users",
+					"id": "c970a0f7-95f0-474c-b369-5fad0c5ae131",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/users"
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}",
+					"id": "510a6017-07c5-432c-8de6-87d395f0e031",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}/tasks",
+					"id": "3a4396ea-de14-4153-a00a-ad60658ea09b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/users/2/tasks"
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}/roles",
+					"id": "5d63ab05-70ba-45a3-b16f-dc069e5af487",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/users/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/users/{id}",
+					"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"mike3\",\n    \"email\": \"mike@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/users/2"
+					},
+					"response": []
+				}
+			],
+			"id": "e37f14f8-c47c-4a8e-b3ef-9ea3de73ab74",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
+					}
+				}
+			]
+		},
+		{
+			"name": "Roles",
+			"item": [
+				{
+					"name": "/roles",
+					"id": "44f8ae2a-3e9c-45b0-8701-846bc96488c7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/roles"
+					},
+					"response": []
+				},
+				{
+					"name": "/roles/{id}",
+					"id": "16782534-05a8-4f73-9bc5-78c9c48decca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/roles/2"
+					},
+					"response": []
+				},
+				{
+					"name": "/roles/{id}",
+					"id": "b7e947aa-2ea1-4931-956b-72438d8e1079",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"ADMIN\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/roles/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/roles",
+					"id": "9d732200-3723-4b64-a79a-17379a32707d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"MODERATOR\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/roles"
+					},
+					"response": []
+				}
+			],
+			"id": "341008f7-ccaa-496c-9d1f-f9e9d0d9562c",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						],
+						"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
+					}
+				}
+			]
+		},
+		{
+			"name": "Tasks",
+			"item": [
+				{
+					"name": "/tasks",
+					"id": "6e456027-6494-44fe-b513-d83baa4545ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/tasks"
+					},
+					"response": []
+				},
+				{
+					"name": "/tasks/{id}",
+					"id": "93580f4a-0706-4c13-9b19-9f9bb2fdefb9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}/tasks/1"
+					},
+					"response": []
+				},
+				{
+					"name": "/tasks/{id}",
+					"id": "240cbe32-f082-4c60-a87e-5d92f8b92887",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"New Task 3\",\n    \"description\": \"New Task 3 Description\",\n    \"status\": \"TO_DO\",\n    \"dueDate\": \"2023-07-25T00:00:00\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/tasks/2"
+					},
+					"response": []
+				},
+				{
+					"name": "/tasks",
+					"id": "34f8ad18-0cf8-491b-b81e-2f56bd10bd99",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Task 3\",\n    \"description\": \"Task 3 Description\",\n    \"userId\": 2,\n    \"status\": \"TO_DO\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/tasks"
+					},
+					"response": []
+				}
+			],
+			"id": "10e53d3c-ceda-463b-a91a-5124a4d4a43d"
 		}
 	],
 	"auth": {
