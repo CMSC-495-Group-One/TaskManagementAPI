@@ -390,6 +390,19 @@
 							"response": []
 						},
 						{
+							"name": "/users/{id}/tasks",
+							"id": "3a4396ea-de14-4153-a00a-ad60658ea09b",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{localURL}}/users/1"
+							},
+							"response": []
+						},
+						{
 							"name": "/users/{id}",
 							"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
 							"protocolProfileBehavior": {
