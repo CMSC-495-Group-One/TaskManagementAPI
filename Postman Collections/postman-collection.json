@@ -502,7 +502,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"MOD\"\n}",
+									"raw": "{\n    \"name\": \"ADMIN\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
