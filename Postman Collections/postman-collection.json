@@ -411,7 +411,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{localURL}}/users/1"
+								"url": "{{base-url}}/users/1"
 							},
 							"response": []
 						},
