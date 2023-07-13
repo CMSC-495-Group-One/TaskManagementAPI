@@ -466,7 +466,7 @@
 							"response": []
 						},
 						{
-							"name": "/roles/{id}",
+							"name": "/roles",
 							"id": "9d732200-3723-4b64-a79a-17379a32707d",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
