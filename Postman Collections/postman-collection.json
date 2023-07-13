@@ -159,7 +159,7 @@
 					"request": {
 						"method": "DELETE",
 						"header": [],
-						"url": "{{base-url}}/users/2/tasks"
+						"url": "{{base-url}}/users/2"
 					},
 					"response": []
 				},
