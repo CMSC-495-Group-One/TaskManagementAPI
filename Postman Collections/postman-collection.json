@@ -321,14 +321,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"kyndall\",\n    \"password\": \"password\",\n    \"email\": \"kyndal@gmail.com\"\n}",
+									"raw": "{ \"username\": \"user\", \"password\": \"password\", \"email\": \"user@mail.com\" }",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "{{localURL}}/auth/signup"
+								"url": "{{base-url}}/auth/signup"
 							},
 							"response": []
 						}
