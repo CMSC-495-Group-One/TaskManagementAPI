@@ -275,13 +275,13 @@
 					"response": []
 				},
 				{
-					"name": "/roles/{id} Copy",
+					"name": "/roles/{id}",
 					"id": "eb831a81-4fb8-476d-b585-9e50a8271d59",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
