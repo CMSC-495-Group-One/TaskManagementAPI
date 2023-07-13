@@ -426,14 +426,14 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"mike\",\n    \"email\": \"mike@gmail.com\"\n}",
+									"raw": "{\n    \"username\": \"mike3\",\n    \"email\": \"mike@gmail.com\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
 										}
 									}
 								},
-								"url": "{{localURL}}/users/2"
+								"url": "{{base-url}}/users/2"
 							},
 							"response": []
 						}
