@@ -2,9 +2,7 @@
 	"info": {
 		"_postman_id": "9943a0c4-c2e4-4a8d-a103-b50b9cc33aaa",
 		"name": "TaskManagement",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "20556562",
-		"_collection_link": "https://taskmanagement-group1.postman.co/workspace/Group-1~5b8fb000-2758-4b21-8dbf-48af7fb97d07/collection/20556562-9943a0c4-c2e4-4a8d-a103-b50b9cc33aaa?action=share&creator=20556562&source=collection_link"
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
@@ -16,6 +14,7 @@
 						{
 							"listen": "test",
 							"script": {
+								"id": "4e8e71b2-cff0-498a-aa03-26d7ae534cad",
 								"exec": [
 									"var jsonData = pm.response.json();",
 									"pm.environment.set(\"accessToken\", jsonData.accessToken);"
@@ -24,6 +23,10 @@
 							}
 						}
 					],
+					"id": "e8522195-8561-46e9-96e2-d7c9f4ad8c2c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -39,21 +42,16 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/auth/signin",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"auth",
-								"signin"
-							]
-						}
+						"url": "{{base-url}}/auth/signin"
 					},
 					"response": []
 				},
 				{
 					"name": "/auth/signup",
+					"id": "e4940714-4915-419f-9f53-e2fa1136fbac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -69,20 +67,12 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/auth/signup",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"auth",
-								"signup"
-							]
-						}
+						"url": "{{base-url}}/auth/signup"
 					},
 					"response": []
 				}
 			],
+			"id": "bc63e237-2d28-4307-9326-d53413333a52",
 			"auth": {
 				"type": "noauth"
 			},
@@ -93,7 +83,8 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"id": "17142d62-8c12-46c5-b216-666b954fd7c3"
 					}
 				},
 				{
@@ -102,7 +93,8 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"id": "c11addeb-ed7e-4a86-aaa2-fda2698e5f0c"
 					}
 				}
 			]
@@ -112,41 +104,36 @@
 			"item": [
 				{
 					"name": "/users",
+					"id": "c970a0f7-95f0-474c-b369-5fad0c5ae131",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/users",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"users"
-							]
-						}
+						"url": "{{base-url}}/users"
 					},
 					"response": []
 				},
 				{
 					"name": "/users/{id}",
+					"id": "510a6017-07c5-432c-8de6-87d395f0e031",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/users/1",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"users",
-								"1"
-							]
-						}
+						"url": "{{base-url}}/users/1"
 					},
 					"response": []
 				},
 				{
 					"name": "/users/{id}",
+					"id": "27ed645e-dfd0-48fd-b7ef-ea688b00fe97",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -159,21 +146,16 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/users/2",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"users",
-								"2"
-							]
-						}
+						"url": "{{base-url}}/users/2"
 					},
 					"response": []
 				},
 				{
 					"name": "/users/{id}",
+					"id": "b9f7c62f-15db-4ae4-b9e8-c738ab7aec1c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -186,57 +168,38 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/users/2",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"users",
-								"2"
-							]
-						}
+						"url": "{{base-url}}/users/2"
 					},
 					"response": []
 				},
 				{
 					"name": "/users/{id}/tasks",
+					"id": "3a4396ea-de14-4153-a00a-ad60658ea09b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/users/2/tasks",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"users",
-								"2",
-								"tasks"
-							]
-						}
+						"url": "{{base-url}}/users/2/tasks"
 					},
 					"response": []
 				},
 				{
 					"name": "/users/{id}/roles",
+					"id": "5d63ab05-70ba-45a3-b16f-dc069e5af487",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/users/1",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"users",
-								"1"
-							]
-						}
+						"url": "{{base-url}}/users/1"
 					},
 					"response": []
 				}
 			],
+			"id": "e37f14f8-c47c-4a8e-b3ef-9ea3de73ab74",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -244,7 +207,8 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
 					}
 				},
 				{
@@ -253,7 +217,8 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
 					}
 				}
 			]
@@ -263,23 +228,23 @@
 			"item": [
 				{
 					"name": "/roles",
+					"id": "44f8ae2a-3e9c-45b0-8701-846bc96488c7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/roles",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"roles"
-							]
-						}
+						"url": "{{base-url}}/roles"
 					},
 					"response": []
 				},
 				{
 					"name": "/roles",
+					"id": "9d732200-3723-4b64-a79a-17379a32707d",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -292,38 +257,29 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/roles",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"roles"
-							]
-						}
+						"url": "{{base-url}}/roles"
 					},
 					"response": []
 				},
 				{
 					"name": "/roles/{id}",
+					"id": "16782534-05a8-4f73-9bc5-78c9c48decca",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/roles/2",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"roles",
-								"2"
-							]
-						}
+						"url": "{{base-url}}/roles/2"
 					},
 					"response": []
 				},
 				{
 					"name": "/roles/{id}",
+					"id": "b7e947aa-2ea1-4931-956b-72438d8e1079",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -336,21 +292,16 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/roles/1",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"roles",
-								"1"
-							]
-						}
+						"url": "{{base-url}}/roles/1"
 					},
 					"response": []
 				},
 				{
 					"name": "/roles/{id}",
+					"id": "eb831a81-4fb8-476d-b585-9e50a8271d59",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -363,20 +314,12 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/roles/1",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"roles",
-								"1"
-							]
-						}
+						"url": "{{base-url}}/roles/1"
 					},
 					"response": []
 				}
 			],
+			"id": "341008f7-ccaa-496c-9d1f-f9e9d0d9562c",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -384,7 +327,8 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"id": "4dec9953-8d8e-429f-b808-3605608a2c0e"
 					}
 				},
 				{
@@ -393,7 +337,8 @@
 						"type": "text/javascript",
 						"exec": [
 							""
-						]
+						],
+						"id": "6d75384c-0674-4d3c-ab17-d5ae7335a7ee"
 					}
 				}
 			]
@@ -403,23 +348,23 @@
 			"item": [
 				{
 					"name": "/tasks",
+					"id": "6e456027-6494-44fe-b513-d83baa4545ac",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/tasks",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"tasks"
-							]
-						}
+						"url": "{{base-url}}/tasks"
 					},
 					"response": []
 				},
 				{
 					"name": "/tasks",
+					"id": "34f8ad18-0cf8-491b-b81e-2f56bd10bd99",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -432,38 +377,29 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/tasks",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"tasks"
-							]
-						}
+						"url": "{{base-url}}/tasks"
 					},
 					"response": []
 				},
 				{
 					"name": "/tasks/{id}",
+					"id": "93580f4a-0706-4c13-9b19-9f9bb2fdefb9",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
-						"url": {
-							"raw": "{{base-url}}/tasks/1",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"tasks",
-								"1"
-							]
-						}
+						"url": "{{base-url}}/tasks/1"
 					},
 					"response": []
 				},
 				{
 					"name": "/tasks/{id}",
+					"id": "240cbe32-f082-4c60-a87e-5d92f8b92887",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "PUT",
 						"header": [],
@@ -476,23 +412,18 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/tasks/2",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"tasks",
-								"2"
-							]
-						}
+						"url": "{{base-url}}/tasks/2"
 					},
 					"response": []
 				},
 				{
 					"name": "/tasks/{id}",
+					"id": "3ad1f038-df47-4f3f-85c8-fba7f3b54532",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [],
 						"body": {
 							"mode": "raw",
@@ -503,31 +434,19 @@
 								}
 							}
 						},
-						"url": {
-							"raw": "{{base-url}}/tasks/2",
-							"host": [
-								"{{base-url}}"
-							],
-							"path": [
-								"tasks",
-								"2"
-							]
-						}
+						"url": "{{base-url}}/tasks/2"
 					},
 					"response": []
 				}
-			]
+			],
+			"id": "10e53d3c-ceda-463b-a91a-5124a4d4a43d"
 		}
 	],
 	"auth": {
 		"type": "bearer",
-		"bearer": [
-			{
-				"key": "token",
-				"value": "{{accessToken}}",
-				"type": "string"
-			}
-		]
+		"bearer": {
+			"token": "{{accessToken}}"
+		}
 	},
 	"event": [
 		{
@@ -536,7 +455,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "b5d4ffe7-85c4-421c-a0b8-4084c6a892ec"
 			}
 		},
 		{
@@ -545,7 +465,8 @@
 				"type": "text/javascript",
 				"exec": [
 					""
-				]
+				],
+				"id": "cf0a8b7f-a340-413d-8730-785e079be46c"
 			}
 		}
 	]
