@@ -440,7 +440,7 @@
 					"name": "Roles",
 					"item": [
 						{
-							"name": "/users",
+							"name": "/roles",
 							"id": "44f8ae2a-3e9c-45b0-8701-846bc96488c7",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
