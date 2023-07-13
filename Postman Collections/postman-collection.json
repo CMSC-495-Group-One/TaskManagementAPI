@@ -453,7 +453,7 @@
 							"response": []
 						},
 						{
-							"name": "/users/{id}",
+							"name": "/roles/{id}",
 							"id": "16782534-05a8-4f73-9bc5-78c9c48decca",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
