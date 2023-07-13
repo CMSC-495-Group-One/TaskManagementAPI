@@ -476,7 +476,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"username\": \"mike\",\n    \"email\": \"mike@gmail.com\"\n}",
+									"raw": "{\n    \"name\": \"MODERATOR\"\n}",
 									"options": {
 										"raw": {
 											"language": "json"
