@@ -151,6 +151,28 @@
 					"response": []
 				},
 				{
+					"name": "/users/{id}",
+					"id": "b9f7c62f-15db-4ae4-b9e8-c738ab7aec1c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"mike3\",\n    \"email\": \"mike@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{base-url}}/users/2"
+					},
+					"response": []
+				},
+				{
 					"name": "/users/{id}/tasks",
 					"id": "3a4396ea-de14-4153-a00a-ad60658ea09b",
 					"protocolProfileBehavior": {
