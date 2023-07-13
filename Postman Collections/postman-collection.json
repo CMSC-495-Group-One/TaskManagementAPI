@@ -278,7 +278,7 @@
 										"id": "4e8e71b2-cff0-498a-aa03-26d7ae534cad",
 										"exec": [
 											"var jsonData = pm.response.json();",
-											"pm.globals.set(\"accessToken\", jsonData.accessToken);"
+											"pm.environment.set(\"accessToken\", jsonData.accessToken);"
 										],
 										"type": "text/javascript"
 									}
