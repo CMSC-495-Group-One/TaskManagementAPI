@@ -69,26 +69,26 @@ public class DatabaseSeed implements CommandLineRunner {
 
         // Assign ADMIN to admin user
         String assignAdminRoleSql = "INSERT INTO user_roles (user_id, role_id) " +
-                "SELECT app_users.id, roles.id " +
+                "SELECT app_users.user_id, roles.role_id " +
                 "FROM app_users " +
                 "JOIN roles ON roles.name = 'ADMIN' " +
-                "LEFT JOIN user_roles ON user_roles.user_id = app_users.id " +
-                "AND user_roles.role_id = roles.id " +
+                "LEFT JOIN user_roles ON user_roles.user_id = app_users.user_id " +
+                "AND user_roles.role_id = roles.role_id " +
                 "WHERE app_users.username = 'admin' AND user_roles.user_id IS NULL";
         jdbcTemplate.execute(assignAdminRoleSql);
 
         // Create two tasks and assign to admin and john
         String task1Sql = "INSERT INTO tasks (title, description, user_id, status, created_date, due_date) " +
-                "SELECT 'Task 1', 'Description of Task 1', app_users.id, 'TO_DO', CURRENT_TIMESTAMP, CURRENT_DATE + 7 " +
+                "SELECT 'Task 1', 'Description of Task 1', app_users.user_id, 'TO_DO', CURRENT_TIMESTAMP, CURRENT_DATE + 7 " +
                 "FROM app_users " +
-                "LEFT JOIN tasks ON tasks.user_id = app_users.id AND tasks.title = 'Task 1' " +
+                "LEFT JOIN tasks ON tasks.user_id = app_users.user_id AND tasks.title = 'Task 1' " +
                 "WHERE app_users.username = 'admin' AND tasks.id IS NULL";
         jdbcTemplate.execute(task1Sql);
 
         String task2Sql = "INSERT INTO tasks (title, description, user_id, status, created_date, due_date) " +
-                "SELECT 'Task 2', 'Description of Task 2', app_users.id, 'IN_PROGRESS', CURRENT_TIMESTAMP, CURRENT_DATE + 7 " +
+                "SELECT 'Task 2', 'Description of Task 2', app_users.user_id, 'IN_PROGRESS', CURRENT_TIMESTAMP, CURRENT_DATE + 7 " +
                 "FROM app_users " +
-                "LEFT JOIN tasks ON tasks.user_id = app_users.id AND tasks.title = 'Task 2' " +
+                "LEFT JOIN tasks ON tasks.user_id = app_users.user_id AND tasks.title = 'Task 2' " +
                 "WHERE app_users.username = 'john' AND tasks.id IS NULL";
         jdbcTemplate.execute(task2Sql);
     }

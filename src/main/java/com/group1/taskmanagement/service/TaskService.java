@@ -1,12 +1,11 @@
 package com.group1.taskmanagement.service;
 
 import com.group1.taskmanagement.dto.TaskDto;
+import com.group1.taskmanagement.interfaces.HasResourceRights;
 import com.group1.taskmanagement.model.Task;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.TaskRepository;
 import com.group1.taskmanagement.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -47,10 +46,10 @@ public class TaskService {
         taskRepository.save(newTask);
     }
 
+    @HasResourceRights
     public TaskDto updateTask(Long id, TaskDto taskDto) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
-        userService.hasUserRights(existingTask.getUser().getId());
 
         Task updatedTaskFromDto;
         if (taskDto.getUserId() != null) {
@@ -74,18 +73,19 @@ public class TaskService {
     }
 
     public List<TaskDto> findAllByUserId(Long id) {
-        List<Task> tasks = taskRepository.findByUserId(id);
+        List<Task> tasks = taskRepository.findByUser_userId(id);
         return tasks.stream()
                 .map(Task::toDto)
                 .collect(Collectors.toList());
     }
 
-    public ResponseEntity<Void> deleteById(Long id) {
-        userService.hasUserRights(id);
+    @HasResourceRights
+    public TaskDto deleteById(Long id) {
         if (!taskRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
+        Task deletedTask = taskRepository.findById(id).get();
         taskRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return Task.toDto(deletedTask);
     }
 }

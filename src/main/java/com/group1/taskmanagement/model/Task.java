@@ -51,7 +51,7 @@ public class Task {
                 .id(task.getId())
                 .title(task.getTitle())
                 .description(task.getDescription())
-                .userId(task.getUser().getId())
+                .userId(task.getUser().getUserId())
                 .createdDate(task.getCreatedDate())
                 .updatedDate(task.getUpdatedDate())
                 .dueDate(task.getDueDate())

@@ -18,7 +18,8 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(nullable = false, unique = true)
     private String username;
@@ -35,13 +36,13 @@ public class User {
     // FetchType.EAGER will grab the roles for the User automatically
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "role_id"))
     private List<Role> roles = new ArrayList<>();
 
     public static UserDto toDto(User user) {
         return UserDto.builder()
-                .id(user.getId())
+                .userId(user.getUserId())
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .tasks(user.getTasks().stream()

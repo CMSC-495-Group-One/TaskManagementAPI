@@ -2,11 +2,10 @@ package com.group1.taskmanagement.controller;
 
 import com.group1.taskmanagement.dto.TaskDto;
 import com.group1.taskmanagement.dto.UserDto;
+import com.group1.taskmanagement.interfaces.HasAdminRole;
 import com.group1.taskmanagement.service.TaskService;
-import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -41,7 +40,8 @@ public class UserController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        return userService.deleteById(id);
+        userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/tasks")

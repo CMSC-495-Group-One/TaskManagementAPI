@@ -1,6 +1,7 @@
 package com.group1.taskmanagement.service;
 
 import com.group1.taskmanagement.dto.RoleDto;
+import com.group1.taskmanagement.interfaces.HasAdminRole;
 import com.group1.taskmanagement.model.Role;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.RoleRepository;
@@ -34,11 +35,13 @@ public class RoleService {
         return Role.toDto(role);
     }
 
+    @HasAdminRole
     public void createRole(RoleDto roleDto) {
         Role newRole = Role.fromDto(roleDto);
         roleRepository.save(newRole);
     }
 
+    @HasAdminRole
     public RoleDto updateRole(Long id, RoleDto roleDto) throws IllegalAccessException {
         Role exsistingRole = roleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Role not found"));
@@ -48,12 +51,13 @@ public class RoleService {
         return Role.toDto(updatedRole);
     }
 
+    @HasAdminRole
     public ResponseEntity<Void> deleteById(Long id) {
         if (!roleRepository.existsById(id)) {
             return ResponseEntity.notFound().build();
         }
 
-        List<User> users = userRepository.findAllByRoles_Id(id);;
+        List<User> users = userRepository.findAllByRoles_roleId(id);
 
         Role role = roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
         for (User user : users) {
