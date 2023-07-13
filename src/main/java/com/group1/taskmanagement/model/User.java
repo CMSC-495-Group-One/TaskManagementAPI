@@ -33,7 +33,7 @@ public class User {
     private List<Task> tasks = new ArrayList<>();
 
     // FetchType.EAGER will grab the roles for the User automatically
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
@@ -45,10 +45,10 @@ public class User {
                 .username(user.getUsername())
                 .email(user.getEmail())
                 .tasks(user.getTasks().stream()
-                        .map(task -> Task.toDto(task))
+                        .map(task -> Task.toDto(task).getId())
                         .collect(Collectors.toList()))
                 .roles(user.getRoles().stream()
-                        .map(role -> Role.toDto(role))
+                        .map(role -> Role.toDto(role).getName())
                         .collect(Collectors.toList()))
                 .build();
     }

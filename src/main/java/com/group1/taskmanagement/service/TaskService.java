@@ -5,6 +5,7 @@ import com.group1.taskmanagement.model.Task;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.TaskRepository;
 import com.group1.taskmanagement.repository.UserRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -72,5 +73,20 @@ public class TaskService {
 
         Task updatedTask = taskRepository.save(existingTask);
         return Task.toDto(updatedTask);
+    }
+
+    public List<TaskDto> findAllByUserId(Long id) {
+        List<Task> tasks = taskRepository.findByUserId(id);
+        return tasks.stream()
+                .map(Task::toDto)
+                .collect(Collectors.toList());
+    }
+
+    public ResponseEntity<Void> deleteById(Long id) {
+        if (!taskRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
+        }
+        taskRepository.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

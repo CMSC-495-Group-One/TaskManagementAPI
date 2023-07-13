@@ -1,6 +1,7 @@
 package com.group1.taskmanagement.model;
 
 import com.group1.taskmanagement.dto.RoleDto;
+import com.group1.taskmanagement.dto.TaskDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,5 +26,13 @@ public class Role {
                 .id(role.getId())
                 .name(role.getName())
                 .build();
+    }
+
+    public static Role fromDto(RoleDto role) {
+        Role.RoleBuilder builder = Role.builder();
+
+        builder.name(role.getName());
+
+        return builder.build();
     }
 }

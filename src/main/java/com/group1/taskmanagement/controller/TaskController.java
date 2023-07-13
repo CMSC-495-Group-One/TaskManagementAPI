@@ -38,11 +38,15 @@ public class TaskController {
         return ResponseEntity.ok(taskService.findTaskById(id));
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
         User currentUser = userService.getCurrentUser();
         TaskDto updatedTask = taskService.updateTask(id, taskDto, currentUser);
         return ResponseEntity.ok(updatedTask);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
+        return taskService.deleteById(id);
     }
 }
