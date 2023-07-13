@@ -461,7 +461,7 @@
 							"request": {
 								"method": "GET",
 								"header": [],
-								"url": "{{localURL}}/users/1"
+								"url": "{{localURL}}/roles/1"
 							},
 							"response": []
 						},
