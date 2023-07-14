@@ -1,12 +1,11 @@
 package com.group1.taskmanagement.service;
 
 import com.group1.taskmanagement.dto.TaskDto;
+import com.group1.taskmanagement.interfaces.HasResourceRights;
 import com.group1.taskmanagement.model.Task;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.TaskRepository;
 import com.group1.taskmanagement.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -19,10 +18,12 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
+    private final UserService userService;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository, UserService userService) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     public List<TaskDto> findAll() {
@@ -45,16 +46,12 @@ public class TaskService {
         taskRepository.save(newTask);
     }
 
-    public TaskDto updateTask(Long id, TaskDto taskDto, User currentUser) {
+    @HasResourceRights
+    public TaskDto updateTask(Long id, TaskDto taskDto) {
         Task existingTask = taskRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Task not found"));
 
-        if (!(currentUser.getId().equals(existingTask.getUser().getId()) || currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN")))) {
-            throw new AccessDeniedException("User not authorized to update this task");
-        }
-
         Task updatedTaskFromDto;
-
         if (taskDto.getUserId() != null) {
             User user = userRepository.findById(taskDto.getUserId())
                     .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + taskDto.getUserId()));
@@ -76,17 +73,19 @@ public class TaskService {
     }
 
     public List<TaskDto> findAllByUserId(Long id) {
-        List<Task> tasks = taskRepository.findByUserId(id);
+        List<Task> tasks = taskRepository.findByUser_userId(id);
         return tasks.stream()
                 .map(Task::toDto)
                 .collect(Collectors.toList());
     }
 
-    public ResponseEntity<Void> deleteById(Long id) {
+    @HasResourceRights
+    public TaskDto deleteById(Long id) {
         if (!taskRepository.existsById(id)) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
+        Task deletedTask = taskRepository.findById(id).get();
         taskRepository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        return Task.toDto(deletedTask);
     }
 }

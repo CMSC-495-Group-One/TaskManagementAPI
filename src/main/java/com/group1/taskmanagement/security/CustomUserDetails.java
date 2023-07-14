@@ -9,14 +9,14 @@ import java.util.Collection;
 @Getter
 public class CustomUserDetails implements UserDetails {
 
-    private final Long id;
+    private final Long userId;
     private final String username;
     private final String password;
     private final String email;
     private final Collection<? extends GrantedAuthority> authorities;
 
     public CustomUserDetails(com.group1.taskmanagement.model.User user, Collection<? extends GrantedAuthority> authorities) {
-        this.id = user.getId();
+        this.userId = user.getUserId();
         this.username = user.getUsername();
         this.password = user.getPassword();
         this.email = user.getEmail();

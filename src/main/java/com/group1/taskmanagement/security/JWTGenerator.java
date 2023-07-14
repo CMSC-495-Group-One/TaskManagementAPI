@@ -21,7 +21,7 @@ public class JWTGenerator {
 
         CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
         String username = userDetails.getUsername();
-        Long id = userDetails.getId();
+        Long id = userDetails.getUserId();
         String email = userDetails.getEmail();
 
         String token = Jwts.builder()

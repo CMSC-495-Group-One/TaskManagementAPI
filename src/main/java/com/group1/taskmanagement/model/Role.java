@@ -5,6 +5,8 @@ import com.group1.taskmanagement.dto.TaskDto;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter @Setter
 @Builder
@@ -16,14 +18,18 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(name = "role_id")
+    private Long roleId;
 
     @Column(nullable = false)
     private String name;
 
+    @ManyToMany(mappedBy = "roles")
+    private List<User> users = new ArrayList<>();
+
     public static RoleDto toDto(Role role) {
         return RoleDto.builder()
-                .id(role.getId())
+                .roleId(role.getRoleId())
                 .name(role.getName())
                 .build();
     }

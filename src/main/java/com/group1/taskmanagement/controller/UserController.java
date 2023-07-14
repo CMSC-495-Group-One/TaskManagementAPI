@@ -1,10 +1,9 @@
 package com.group1.taskmanagement.controller;
 
-import com.group1.taskmanagement.dto.RoleDto;
 import com.group1.taskmanagement.dto.TaskDto;
 import com.group1.taskmanagement.dto.UserDto;
+import com.group1.taskmanagement.interfaces.HasAdminRole;
 import com.group1.taskmanagement.service.TaskService;
-import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,14 +34,14 @@ public class UserController {
 
     @PutMapping("/{id}")
     public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
-        User currentUser = userService.getCurrentUser();
-        UserDto updatedTask = userService.updateUser(id, userDto, currentUser);
+        UserDto updatedTask = userService.updateUser(id, userDto);
         return ResponseEntity.ok(updatedTask);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
-        return userService.deleteById(id);
+        userService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/tasks")
