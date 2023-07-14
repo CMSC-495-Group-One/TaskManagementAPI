@@ -37,14 +37,6 @@ public class CustomUserDetails implements UserDetails {
         return username;
     }
 
-    public String getFirstName() {
-        return firstname;
-    }
-
-    public String getLastName() {
-        return lastname;
-    }
-
     @Override
     public String getPassword() {
         return password;
