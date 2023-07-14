@@ -31,6 +31,8 @@ public class DatabaseSeed implements CommandLineRunner {
         if(count1 == 0) {
             Map<String, Object> map = new HashMap<>();
             map.put("username", "admin");
+            map.put("firstname", "");
+            map.put("lastname", "");
             map.put("password", "password");
             map.put("email", "admin@email.com");
             webClient.post()
@@ -46,6 +48,8 @@ public class DatabaseSeed implements CommandLineRunner {
         if(count2 == 0) {
             Map<String, Object> map = new HashMap<>();
             map.put("username", "john");
+            map.put("firstname", "john");
+            map.put("lastname", "connor");
             map.put("password", "password");
             map.put("email", "john@email.com");
             webClient.post()
