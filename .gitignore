@@ -37,3 +37,6 @@ src/main/resources/application-local.properties
 
 ### java class file ###
 *.class
+### maven's 'target' folder: contains those .class files ###
+### for when i forget to run 'mvn clean' and then run 'git add *' ###
+target/
