@@ -46,6 +46,8 @@ public class DatabaseSeed implements CommandLineRunner {
         if(count2 == 0) {
             Map<String, Object> map = new HashMap<>();
             map.put("username", "john");
+            map.put("firstname", "john");
+            map.put("lastname", "connor");
             map.put("password", "password");
             map.put("email", "john@email.com");
             webClient.post()

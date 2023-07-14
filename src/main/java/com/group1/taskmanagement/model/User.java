@@ -24,6 +24,12 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = true, unique = false)
+    private String firstname;
+
+    @Column(nullable = true, unique = false)
+    private String lastname;
+
     @Column(nullable = false)
     private String password;
 
@@ -44,6 +50,8 @@ public class User {
         return UserDto.builder()
                 .userId(user.getUserId())
                 .username(user.getUsername())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
                 .email(user.getEmail())
                 .tasks(user.getTasks().stream()
                         .map(task -> Task.toDto(task).getId())
@@ -63,6 +71,13 @@ public class User {
 
         if (user.getEmail() != null) {
             builder.email(user.getEmail());
+        }
+        if (user.getFirstname() != null) {
+            builder.firstname(user.getFirstname());
+        }
+
+        if (user.getLastname() != null) {
+            builder.lastname(user.getLastname());
         }
 
         return builder.build();
