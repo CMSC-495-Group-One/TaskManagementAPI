@@ -3,6 +3,7 @@ package com.group1.taskmanagement.controller;
 import com.group1.taskmanagement.dto.AuthDto;
 import com.group1.taskmanagement.dto.SignInDto;
 import com.group1.taskmanagement.dto.SignUpDto;
+import com.group1.taskmanagement.error.UsernameTakenException;
 import com.group1.taskmanagement.model.Role;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.RoleRepository;
@@ -46,7 +47,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody SignUpDto signUpDto) {
         if (userRepository.existsByUsername(signUpDto.getUsername())) {
-            return new ResponseEntity<>("Username is taken", HttpStatus.BAD_REQUEST);
+            throw new UsernameTakenException("The username: " + signUpDto.getUsername() + " is taken");
         }
 
         User user = new User();

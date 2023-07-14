@@ -1,15 +1,14 @@
 package com.group1.taskmanagement.service;
 
 import com.group1.taskmanagement.dto.UserDto;
+import com.group1.taskmanagement.error.ResourceNotFoundException;
 import com.group1.taskmanagement.interfaces.HasAdminRole;
 import com.group1.taskmanagement.interfaces.HasResourceRights;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.UserRepository;
 import com.group1.taskmanagement.security.CustomUserDetails;
 import org.springframework.security.access.AccessDeniedException;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,7 +25,8 @@ public class UserService {
 
     public User getCurrentUser() {
         CustomUserDetails customUser = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return userRepository.findById(customUser.getUserId()).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return userRepository.findById(customUser.getUserId())
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + customUser.getUserId() + " not found"));
     }
 
     public boolean hasAdminRole() {
@@ -55,14 +55,16 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public UserDto findUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    public UserDto findUserById(Long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + userId + " not found"));
         return User.toDto(user);
     }
 
     @HasResourceRights
-    public UserDto updateUser(Long id, UserDto user) {
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+    public UserDto updateUser(Long userId, UserDto user) {
+        User existingUser = userRepository.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + userId + " not found"));
 
         try {
             ObjectUpdater.updateObject(existingUser, User.fromDto(user));
@@ -75,12 +77,12 @@ public class UserService {
     }
 
     @HasAdminRole
-    public UserDto deleteById(Long id) {
-        if (!userRepository.existsById(id)) {
+    public UserDto deleteById(Long userId) {
+        if (!userRepository.existsById(userId)) {
             return null;
         }
-        User deletedUser = userRepository.findById(id).get();
-        userRepository.deleteById(id);
+        User deletedUser = userRepository.findById(userId).get();
+        userRepository.deleteById(userId);
         return User.toDto(deletedUser);
     }
 }

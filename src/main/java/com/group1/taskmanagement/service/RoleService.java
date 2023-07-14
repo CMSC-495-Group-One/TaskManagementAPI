@@ -1,6 +1,7 @@
 package com.group1.taskmanagement.service;
 
 import com.group1.taskmanagement.dto.RoleDto;
+import com.group1.taskmanagement.error.ResourceNotFoundException;
 import com.group1.taskmanagement.interfaces.HasAdminRole;
 import com.group1.taskmanagement.model.Role;
 import com.group1.taskmanagement.model.User;
@@ -31,7 +32,8 @@ public class RoleService {
     }
 
     public RoleDto findByRoleId(Long id) {
-        Role role = roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
+        Role role = roleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Role with id " + id + " not found"));
         return Role.toDto(role);
     }
 
@@ -44,7 +46,7 @@ public class RoleService {
     @HasAdminRole
     public RoleDto updateRole(Long id, RoleDto roleDto) throws IllegalAccessException {
         Role exsistingRole = roleRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Role not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Role with id " + id + " not found"));
         Role updatedRoleFromDto = Role.fromDto(roleDto);
         ObjectUpdater.updateObject(exsistingRole, updatedRoleFromDto);
         Role updatedRole = roleRepository.save(exsistingRole);
@@ -59,7 +61,8 @@ public class RoleService {
 
         List<User> users = userRepository.findAllByRoles_roleId(id);
 
-        Role role = roleRepository.findById(id).orElseThrow(() -> new RuntimeException("Role not found"));
+        Role role = roleRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Role with id " + id + " not found"));
         for (User user : users) {
             user.getRoles().remove(role);
             userRepository.save(user);
