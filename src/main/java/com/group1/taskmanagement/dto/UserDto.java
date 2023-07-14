@@ -5,16 +5,14 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @Setter
-@Data @Builder
+@Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
-
     private Long userId;
     private String username;
     private String email;
     private List<Long> tasks = new ArrayList<>();
     private List<String> roles = new ArrayList<>();
-
 }

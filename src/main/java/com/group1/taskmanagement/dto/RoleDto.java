@@ -1,14 +1,15 @@
 package com.group1.taskmanagement.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter @Setter
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class RoleDto {
-
     private Long roleId;
     private String name;
 }

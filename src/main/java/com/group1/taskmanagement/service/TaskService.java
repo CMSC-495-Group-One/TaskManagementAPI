@@ -1,12 +1,12 @@
 package com.group1.taskmanagement.service;
 
 import com.group1.taskmanagement.dto.TaskDto;
+import com.group1.taskmanagement.error.ResourceNotFoundException;
 import com.group1.taskmanagement.interfaces.HasResourceRights;
 import com.group1.taskmanagement.model.Task;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.TaskRepository;
 import com.group1.taskmanagement.repository.UserRepository;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -34,27 +34,27 @@ public class TaskService {
     }
 
     public TaskDto findTaskById(Long id) {
-        Task task = taskRepository.findById(id).orElseThrow(() -> new RuntimeException("Task not found"));
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
         return Task.toDto(task);
     }
 
     public void createTask(TaskDto taskDto) {
         User user = userRepository.findById(taskDto.getUserId())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + taskDto.getUserId()));
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + taskDto.getUserId() + " not found"));
         Task newTask = Task.fromDto(taskDto, user);
         newTask.setCreatedDate(LocalDateTime.now());
         taskRepository.save(newTask);
     }
 
     @HasResourceRights
-    public TaskDto updateTask(Long id, TaskDto taskDto) {
+    public TaskDto updateTask(Long id, Long userId, TaskDto taskDto) {
         Task existingTask = taskRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Task not found"));
-
+                .orElseThrow(() -> new ResourceNotFoundException("Task with id " + id + " not found"));
         Task updatedTaskFromDto;
         if (taskDto.getUserId() != null) {
             User user = userRepository.findById(taskDto.getUserId())
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found with id : " + taskDto.getUserId()));
+                    .orElseThrow(() -> new ResourceNotFoundException("User with id " + taskDto.getUserId() + " not found"));
             updatedTaskFromDto = Task.fromDto(taskDto, user);
         } else {
             updatedTaskFromDto = Task.fromDto(taskDto, null);
@@ -80,7 +80,7 @@ public class TaskService {
     }
 
     @HasResourceRights
-    public TaskDto deleteById(Long id) {
+    public TaskDto deleteById(Long id, Long userId) {
         if (!taskRepository.existsById(id)) {
             return null;
         }

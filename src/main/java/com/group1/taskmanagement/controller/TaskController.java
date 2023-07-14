@@ -1,7 +1,6 @@
 package com.group1.taskmanagement.controller;
 
 import com.group1.taskmanagement.dto.TaskDto;
-import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.service.TaskService;
 import com.group1.taskmanagement.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -39,13 +38,15 @@ public class TaskController {
 
     @PutMapping("/{id}")
     public ResponseEntity<TaskDto> updateTask(@PathVariable Long id, @RequestBody TaskDto taskDto) {
-        TaskDto updatedTask = taskService.updateTask(id, taskDto);
+        TaskDto existingTask = taskService.findTaskById(id);
+        TaskDto updatedTask = taskService.updateTask(id, existingTask.getUserId(), taskDto);
         return ResponseEntity.ok(updatedTask);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
-        taskService.deleteById(id);
+        TaskDto existingTask = taskService.findTaskById(id);
+        taskService.deleteById(id, existingTask.getUserId());
         return ResponseEntity.noContent().build();
     }
 }
