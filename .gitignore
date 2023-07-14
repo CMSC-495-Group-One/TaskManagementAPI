@@ -34,3 +34,6 @@ build/
 
 ### Local Files ###
 src/main/resources/application-local.properties
+
+### java class file ###
+*.class
