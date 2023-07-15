@@ -57,7 +57,7 @@ public class User {
                         .map(task -> Task.toDto(task).getId())
                         .collect(Collectors.toList()))
                 .roles(user.getRoles().stream()
-                        .map(role -> Role.toDto(role).getName())
+                        .map(role -> Role.toDto(role).getName().toString())
                         .collect(Collectors.toList()))
                 .build();
     }

@@ -1,5 +1,6 @@
 package com.group1.taskmanagement.controller;
 
+import com.group1.taskmanagement.dto.RoleDto;
 import com.group1.taskmanagement.dto.TaskDto;
 import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.service.TaskService;
@@ -46,5 +47,10 @@ public class UserController {
     @GetMapping("/{id}/tasks")
     public ResponseEntity<List<TaskDto>> getUserTasks(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.findAllByUserId(id));
+    }
+
+    @GetMapping("{id}/roles")
+    public ResponseEntity<List<String>> getUserRoles(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findUserRoles(id));
     }
 }

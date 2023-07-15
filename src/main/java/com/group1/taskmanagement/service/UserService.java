@@ -1,5 +1,6 @@
 package com.group1.taskmanagement.service;
 
+import com.group1.taskmanagement.dto.RoleDto;
 import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.error.ResourceNotFoundException;
 import com.group1.taskmanagement.interfaces.HasAdminRole;
@@ -31,7 +32,7 @@ public class UserService {
 
     public boolean hasAdminRole() {
         User currentUser = getCurrentUser();
-        boolean isAdmin = currentUser.getRoles().stream().anyMatch(role -> role.getName().equals("ADMIN"));
+        boolean isAdmin = currentUser.getRoles().stream().anyMatch(role -> role.getName().toString().equals("ADMIN"));
         if (!isAdmin) {
             throw new AccessDeniedException("Access is denied: No Admin Role");
         }
@@ -84,5 +85,13 @@ public class UserService {
         User deletedUser = userRepository.findById(userId).get();
         userRepository.deleteById(userId);
         return User.toDto(deletedUser);
+    }
+
+    public List<String> findUserRoles(Long id) {
+        User existingUser = userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("User with id " + id + " not found"));
+        return existingUser.getRoles().stream()
+                .map(role -> role.getName().toString())
+                .collect(Collectors.toList());
     }
 }

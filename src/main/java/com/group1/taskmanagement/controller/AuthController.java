@@ -5,6 +5,7 @@ import com.group1.taskmanagement.dto.SignInDto;
 import com.group1.taskmanagement.dto.SignUpDto;
 import com.group1.taskmanagement.error.UsernameTakenException;
 import com.group1.taskmanagement.model.Role;
+import com.group1.taskmanagement.model.RoleName;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.RoleRepository;
 import com.group1.taskmanagement.repository.UserRepository;
@@ -57,7 +58,7 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
         user.setEmail(signUpDto.getEmail());
 
-        Role role = roleRepository.findByName("USER").get();
+        Role role = roleRepository.findByName(RoleName.USER).get();
         user.setRoles(Collections.singletonList(role));
 
         userRepository.save(user);
