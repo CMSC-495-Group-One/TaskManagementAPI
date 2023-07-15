@@ -1,6 +1,5 @@
 package com.group1.taskmanagement.controller;
 
-import com.group1.taskmanagement.dto.RoleDto;
 import com.group1.taskmanagement.dto.TaskDto;
 import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.service.TaskService;

@@ -20,12 +20,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private UserRepository userRepository;
 
-    private UserService userService;
-
     @Autowired
-    public CustomUserDetailsService(UserRepository userRepository, UserService userService) {
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.userService = userService;
     }
 
     @Override

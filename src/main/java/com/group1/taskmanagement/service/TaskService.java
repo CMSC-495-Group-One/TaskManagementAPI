@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,12 +19,10 @@ public class TaskService {
 
     private final TaskRepository taskRepository;
     private final UserRepository userRepository;
-    private final UserService userService;
 
-    public TaskService(TaskRepository taskRepository, UserRepository userRepository, UserService userService) {
+    public TaskService(TaskRepository taskRepository, UserRepository userRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
-        this.userService = userService;
     }
 
     public List<TaskDto> findAll() {
@@ -80,12 +79,16 @@ public class TaskService {
     }
 
     @HasResourceRights
-    public TaskDto deleteById(Long id, Long userId) {
-        if (!taskRepository.existsById(id)) {
-            return null;
+    public void deleteById(Long id, Long userId) {
+        Task task;
+        Optional<Task> deletedTask = taskRepository.findById(id);
+
+        if (deletedTask.isPresent()) {
+            task = deletedTask.get();
+        } else {
+            return;
         }
-        Task deletedTask = taskRepository.findById(id).get();
+
         taskRepository.deleteById(id);
-        return Task.toDto(deletedTask);
     }
 }

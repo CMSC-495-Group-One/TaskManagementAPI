@@ -1,9 +1,7 @@
 package com.group1.taskmanagement.service;
 
-import com.group1.taskmanagement.dto.RoleDto;
 import com.group1.taskmanagement.dto.UserDto;
 import com.group1.taskmanagement.error.ResourceNotFoundException;
-import com.group1.taskmanagement.interfaces.HasAdminRole;
 import com.group1.taskmanagement.interfaces.HasResourceRights;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.UserRepository;
@@ -13,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service("userService")
@@ -77,14 +76,18 @@ public class UserService {
         return User.toDto(updatedUser);
     }
 
-    @HasAdminRole
-    public UserDto deleteById(Long userId) {
-        if (!userRepository.existsById(userId)) {
-            return null;
+    @HasResourceRights
+    public void deleteById(Long userId) {
+        User user;
+        Optional<User> deletedUser = userRepository.findById(userId);
+
+        if (deletedUser.isPresent()) {
+            user = deletedUser.get();
+        } else {
+            return;
         }
-        User deletedUser = userRepository.findById(userId).get();
+
         userRepository.deleteById(userId);
-        return User.toDto(deletedUser);
     }
 
     public List<String> findUserRoles(Long id) {
