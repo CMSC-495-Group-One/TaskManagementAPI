@@ -1,5 +1,6 @@
 package com.group1.taskmanagement.dto;
 
+import com.group1.taskmanagement.model.Difficulty;
 import com.group1.taskmanagement.model.Status;
 import lombok.*;
 
@@ -18,4 +19,5 @@ public class TaskDto {
     private LocalDateTime updatedDate;
     private LocalDateTime dueDate;
     private Status status;
+    private Difficulty difficulty;
 }
