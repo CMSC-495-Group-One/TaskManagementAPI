@@ -47,4 +47,9 @@ public class UserController {
     public ResponseEntity<List<TaskDto>> getUserTasks(@PathVariable Long id) {
         return ResponseEntity.ok(taskService.findAllByUserId(id));
     }
+
+    @GetMapping("{id}/roles")
+    public ResponseEntity<List<String>> getUserRoles(@PathVariable Long id) {
+        return ResponseEntity.ok(userService.findUserRoles(id));
+    }
 }

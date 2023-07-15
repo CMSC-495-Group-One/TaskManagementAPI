@@ -21,8 +21,9 @@ public class Role {
     @Column(name = "role_id")
     private Long roleId;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String name;
+    private RoleName name;
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users = new ArrayList<>();

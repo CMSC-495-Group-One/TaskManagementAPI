@@ -5,6 +5,7 @@ import com.group1.taskmanagement.dto.SignInDto;
 import com.group1.taskmanagement.dto.SignUpDto;
 import com.group1.taskmanagement.error.UsernameTakenException;
 import com.group1.taskmanagement.model.Role;
+import com.group1.taskmanagement.model.RoleName;
 import com.group1.taskmanagement.model.User;
 import com.group1.taskmanagement.repository.RoleRepository;
 import com.group1.taskmanagement.repository.UserRepository;
@@ -20,6 +21,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("${app.base}/auth")
@@ -57,7 +59,13 @@ public class AuthController {
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
         user.setEmail(signUpDto.getEmail());
 
-        Role role = roleRepository.findByName("USER").get();
+        Role role;
+        Optional<Role> roleResponse = roleRepository.findByName(RoleName.USER);
+        if (roleResponse.isPresent()) {
+            role = roleResponse.get();
+        } else {
+            throw new RuntimeException("Error on User role assignment");
+        }
         user.setRoles(Collections.singletonList(role));
 
         userRepository.save(user);

@@ -1,5 +1,6 @@
 package com.group1.taskmanagement.dto;
 
+import com.group1.taskmanagement.model.RoleName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,5 +12,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class RoleDto {
     private Long roleId;
-    private String name;
+    private RoleName name;
 }
