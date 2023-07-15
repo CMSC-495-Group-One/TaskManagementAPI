@@ -42,6 +42,10 @@ public class Task {
     @Enumerated(EnumType.STRING)
     private Status status;
 
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Difficulty difficulty;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
@@ -56,6 +60,7 @@ public class Task {
                 .updatedDate(task.getUpdatedDate())
                 .dueDate(task.getDueDate())
                 .status(task.getStatus())
+                .difficulty(task.getDifficulty())
                 .build();
     }
 
@@ -76,6 +81,10 @@ public class Task {
 
         if (task.getStatus() != null) {
             builder.status(task.getStatus());
+        }
+
+        if (task.getDifficulty() != null) {
+            builder.difficulty(task.getDifficulty());
         }
 
         if (user != null) {
