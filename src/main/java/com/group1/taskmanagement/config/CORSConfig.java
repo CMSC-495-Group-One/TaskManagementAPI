@@ -10,7 +10,7 @@ public class CORSConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "https://task-management-api-test-5ef9ebfe6fb3.herokuapp.com")
+                .allowedOrigins("http://localhost:3000", "https://task-management-ui-test-49beba854b33.herokuapp.com")
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD", "OPTIONS");
     }
 }
