@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.group1.taskmanagement.dto.TaskDto;
 import com.group1.taskmanagement.model.Task;
@@ -22,7 +21,6 @@ import java.util.List;
 import java.util.Arrays;
 import java.util.Optional;
 
-@SpringBootTest
 public class TaskServiceTest {
 
     @Mock
@@ -37,23 +35,43 @@ public class TaskServiceTest {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.openMocks(this);
-        this.taskService = new TaskService(taskRepository, userRepository);
     }
 
     @Test
-    public void testFindAll() {
-        when(taskRepository.findAll()).thenReturn(Arrays.asList(new Task()));
+public void testFindAll() {
+    // create a User object
+    User user = new User();
+    user.setUserId(1L);
 
-        List<TaskDto> result = taskService.findAll();
+    // create a Task object
+    Task task = new Task();
+    task.setUser(user);
 
-        assertFalse(result.isEmpty());
-        verify(taskRepository, times(1)).findAll();
-    }
+    // return the Task object when findAll() is called on the taskRepository
+    when(taskRepository.findAll()).thenReturn(Arrays.asList(task));
+
+    // call the method under test
+    List<TaskDto> result = taskService.findAll();
+
+    // check the results
+    assertFalse(result.isEmpty());
+    verify(taskRepository, times(1)).findAll();
+}
+
 
     @Test
     public void testFindTaskById() {
         Long id = 1L;
-        when(taskRepository.findById(any(Long.class))).thenReturn(Optional.of(new Task()));
+        // create a User object
+        User user = new User();
+        user.setUserId(1L);
+
+        // create a Task object
+        Task task = new Task();
+        task.setUser(user);
+        task.setId(id);
+
+        when(taskRepository.findById(any(Long.class))).thenReturn(Optional.of(task));
 
         TaskDto result = taskService.findTaskById(id);
 
