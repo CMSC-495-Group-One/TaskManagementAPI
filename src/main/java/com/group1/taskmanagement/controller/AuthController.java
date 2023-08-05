@@ -53,11 +53,11 @@ public class AuthController {
         }
 
         User user = new User();
-        user.setUsername(signUpDto.getUsername());
+        user.setUsername(signUpDto.getUsername().toLowerCase());
         user.setFirstname(signUpDto.getFirstname());
         user.setLastname(signUpDto.getLastname());
         user.setPassword(passwordEncoder.encode(signUpDto.getPassword()));
-        user.setEmail(signUpDto.getEmail());
+        user.setEmail(signUpDto.getEmail().toLowerCase());
 
         Role role;
         Optional<Role> roleResponse = roleRepository.findByName(RoleName.USER);
@@ -76,7 +76,7 @@ public class AuthController {
     public ResponseEntity<AuthDto> signin(@RequestBody SignInDto signInDto) {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        signInDto.getUsername(),
+                        signInDto.getUsername().toLowerCase(),
                         signInDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = tokenGenerator.generateToken(authentication);
