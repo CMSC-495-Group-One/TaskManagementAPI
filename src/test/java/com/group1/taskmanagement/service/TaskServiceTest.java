@@ -21,8 +21,10 @@ import static org.mockito.Mockito.*;
 @ExtendWith(MockitoExtension.class)
 class TaskServiceTest {
 
-    @Mock private TaskRepository taskRepository;
-    @Mock private UserRepository userRepository;
+    @Mock
+    private TaskRepository taskRepository;
+    @Mock
+    private UserRepository userRepository;
     private TaskService taskService;
     private User user;
 
