@@ -9,6 +9,7 @@ import com.group1.taskmanagement.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mock;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -21,7 +22,9 @@ import static org.mockito.Mockito.*;
 
 class RoleServiceTest {
 
+    @Mock
     private RoleRepository roleRepository;
+    @Mock
     private UserRepository userRepository;
     private RoleService roleService;
 
@@ -74,7 +77,29 @@ class RoleServiceTest {
     }
 
     @Test
-    void updateRole() {
+    void updateRole() throws IllegalAccessException {
+        Long roleId = 1L;
+        RoleDto roleDto = new RoleDto();
+        roleDto.setName(RoleName.USER);
+
+        Role existingRole = new Role();
+        existingRole.setRoleId(roleId);
+        existingRole.setName(RoleName.ADMIN);
+
+        when(roleRepository.findById(roleId)).thenReturn(Optional.of(existingRole));
+        when(roleRepository.save(existingRole)).thenReturn(existingRole);
+
+        RoleDto updatedRoleDto = roleService.updateRole(roleId, roleDto);
+
+        RoleDto expectedRoleDto = new RoleDto();
+        expectedRoleDto.setRoleId(roleId); // Set the expected roleId value
+        expectedRoleDto.setName(RoleName.USER);
+
+        assertEquals(expectedRoleDto, updatedRoleDto);
+
+        // Verify that the repository methods are called with the expected parameters
+        verify(roleRepository).findById(roleId);
+        verify(roleRepository).save(existingRole);
     }
 
     @Test

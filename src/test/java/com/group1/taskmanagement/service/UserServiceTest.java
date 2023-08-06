@@ -67,11 +67,6 @@ class UserServiceTest {
     }
 
     @Test
-    void hasUserRights() {
-
-    }
-
-    @Test
     void findAll() {
         User user = new User();
         when(userRepository.findAll()).thenReturn(Collections.singletonList(user));
